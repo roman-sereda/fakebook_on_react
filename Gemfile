@@ -9,11 +9,26 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'carrierwave', '>= 1.0.0.beta', '< 2.0'
+gem 'bcrypt-ruby', '>=3.1.2'
+gem 'react-rails', '~> 1.0'
+gem 'will_paginate', '~> 3.0.7'
+gem 'react-router-rails'
+
+
 group :development, :test do
-  gem 'byebug'
+ gem 'byebug'
+ gem "minitest-rails"
+end
+
+group :test do
+ gem 'factory_girl_rails', '>=4.2.1'
+ gem "capybara"
+ gem "capybara-webkit"
+ gem 'database_cleaner'
 end
 
 group :development do
-  gem 'web-console', '~> 2.0'
-  gem 'spring'
+ gem 'web-console', '~> 2.0'
+ gem 'spring'
 end
