@@ -14,6 +14,7 @@ gem 'bcrypt-ruby', '>=3.1.2'
 gem 'react-rails', '~> 1.0'
 gem 'will_paginate', '~> 3.0.7'
 gem 'react-router-rails'
+gem 'webpack-rails'
 
 
 group :development, :test do
@@ -32,3 +33,5 @@ group :development do
  gem 'web-console', '~> 2.0'
  gem 'spring'
 end
+
+gem 'foreman'
