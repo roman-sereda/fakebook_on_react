@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def shit
-    render "layouts/application" 
+    render :file => 'frontend/index.html', :layout => false
   end
 end
