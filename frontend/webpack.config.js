@@ -1,9 +1,24 @@
+var path = require('path');
+var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var devFlagPlugin = new webpack.DefinePlugin({
+  __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
+});
+
 module.exports = {
-  entry: './src/app.js',
+  entry: './src/actions/index.js',
   output: {
-    path: __dirname + "/../uploads",
+    path: __dirname + "/../public",
     filename: 'bundle.js'
   },
+
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+    devFlagPlugin,
+    new ExtractTextPlugin('app.css')
+  ],
+
   module: {
     loaders: [
       {

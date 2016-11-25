@@ -3,25 +3,28 @@
   "version": "1.0.0",
   "description": "Pytin Hyilo",
   "repository": "https://github.com/roman-sereda/fakebook_on_react.git",
-  "main": "application.js",
+  "main": "bundle.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --debug"
+    "start": "webpack-dev-server --inline --content-base ."
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "extract-text-webpack-plugin": "^0.8.2",
+    "http-server": "^0.8.5",
     "immutable": "^3.8.1",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-redux": "^4.4.6",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "webpack-dev-server": "^1.16.2"
   },
   "devDependencies": {
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.8",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
+    "extract-text-webpack-plugin": "^0.8.2",
     "redux-devtools": "^3.3.1",
     "webpack": "^1.13.3"
   }
