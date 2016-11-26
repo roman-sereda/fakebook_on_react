@@ -1,6 +1,6 @@
 import axios from 'axios';
 import store from '../store';
-import { getUsersSuccess, deleteUserSuccess, userProfileSuccess } from '../actions/user-actions';
+import { getUsersSuccess, createSessionSuccess, userProfileSuccess } from '../actions/user-actions';
 
 /**
  * Get all users
@@ -14,12 +14,9 @@ export function getUsers() {
     });
 }
 
-/**
- * Search users
- */
-
-export function searchUsers(query = '') {
-  return axios.get('http://localhost:8080/users?q='+ query)
+export function createSession(user2) {
+  console.log(user2)
+  return axios.post('http://localhost:3000/users', {user: user2})
     .then(response => {
       store.dispatch(getUsersSuccess(response.data));
       return response;
@@ -27,17 +24,7 @@ export function searchUsers(query = '') {
 }
 
 /**
- * Delete a user
- */
-
-export function deleteUser(userId) {
-  return axios.delete('http://localhost:3001/8080/' + userId)
-    .then(response => {
-      store.dispatch(deleteUserSuccess(userId));
-      return response;
-    });
-}
-
+ * Search users
 /**
  * getProfile() is much more complex because it has to make
  * three XHR requests to get all the profile info.

@@ -5,7 +5,7 @@ export default function(props) {
   return (
     <div className="user-profile">
       <div className="details">
-        <div>ddd</div>
+        <h3>Github Repos:</h3>
         <h1>{props.name}</h1>
         <h1>{props.surname}</h1>
         <h1>{props.email}</h1>

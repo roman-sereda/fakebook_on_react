@@ -13,3 +13,10 @@ export function userProfileSuccess(userProfile) {
     userProfile
   };
 }
+
+export function createSessionSuccess(userProfile) {
+  return {
+    type: types.CREATE_SESSION_SUCCESS,
+    user
+  };
+}
