@@ -10,14 +10,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.15.2",
+    "es6-promise": "^4.0.5",
     "extract-text-webpack-plugin": "^0.8.2",
     "http-server": "^0.8.5",
     "immutable": "^3.8.1",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-redux": "^4.4.6",
+    "react-router": "^3.0.0",
     "redux": "^3.6.0",
-    "webpack-dev-server": "^1.16.2"
+    "webpack-dev-server": "^1.16.2",
+    "webpack-stream": "^3.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.18.2",
