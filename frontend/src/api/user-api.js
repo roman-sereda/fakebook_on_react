@@ -50,7 +50,7 @@ export function getProfile(userId) {
   let profile = {};
 
   // Get the user data from our local database.
-  return axios.get('http://localhost:8080/users/' + userId)
+  return axios.get('http://localhost:3000/users/' + userId)
     .then(response => {
 
       let user = response.data;

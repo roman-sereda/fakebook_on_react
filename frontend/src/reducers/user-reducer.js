@@ -11,6 +11,9 @@ const userReducer = function(state = initialState, action) {
 
     case types.GET_USERS_SUCCESS:
       return Object.assign({}, state, { users: action.users });
+
+    case types.USER_PROFILE_SUCCESS:
+      return Object.assign({}, state, { userProfile: action.userProfile });
   }
 
   return state;

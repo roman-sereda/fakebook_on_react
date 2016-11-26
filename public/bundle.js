@@ -75,7 +75,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(298).polyfill();
+	__webpack_require__(301).polyfill();
 
 	// Provider is a top-level component that wrapps our entire application, including
 	// the Router. We pass it a reference to the store so we can use react-redux's
@@ -22990,6 +22990,9 @@
 
 	    case types.GET_USERS_SUCCESS:
 	      return Object.assign({}, state, { users: action.users });
+
+	    case types.USER_PROFILE_SUCCESS:
+	      return Object.assign({}, state, { userProfile: action.userProfile });
 	  }
 
 	  return state;
@@ -23007,6 +23010,7 @@
 	  value: true
 	});
 	var GET_USERS_SUCCESS = exports.GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
+	var USER_PROFILE_SUCCESS = exports.USER_PROFILE_SUCCESS = 'USER_PROFILE_SUCCESS';
 
 /***/ },
 /* 213 */
@@ -40116,12 +40120,22 @@
 
 	var _userListContainer2 = _interopRequireDefault(_userListContainer);
 
+	var _currentUserProfileContainer = __webpack_require__(298);
+
+	var _currentUserProfileContainer2 = _interopRequireDefault(_currentUserProfileContainer);
+
+	var _userProfileContainer = __webpack_require__(300);
+
+	var _userProfileContainer2 = _interopRequireDefault(_userProfileContainer);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createElement(
 	  _reactRouter.Router,
 	  { history: _reactRouter.hashHistory },
-	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _userListContainer2.default })
+	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _currentUserProfileContainer2.default }),
+	  _react2.default.createElement(_reactRouter.Route, { path: 'prof', component: _currentUserProfileContainer2.default }),
+	  _react2.default.createElement(_reactRouter.Route, { path: ':userId', component: _userProfileContainer2.default })
 	);
 
 /***/ },
@@ -44991,10 +45005,11 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'details' },
+	          user.name,
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: '/users/' + user.id },
-	            user.name
+	            user.id
 	          ),
 	          'Fuck you'
 	        )
@@ -45084,7 +45099,7 @@
 	  var profile = {};
 
 	  // Get the user data from our local database.
-	  return _axios2.default.get('http://localhost:8080/users/' + userId).then(function (response) {
+	  return _axios2.default.get('http://localhost:3000/users/' + userId).then(function (response) {
 
 	    var user = response.data;
 	    profile.name = user.name;
@@ -46600,6 +46615,7 @@
 	  value: true
 	});
 	exports.getUsersSuccess = getUsersSuccess;
+	exports.userProfileSuccess = userProfileSuccess;
 
 	var _actionTypes = __webpack_require__(212);
 
@@ -46614,8 +46630,148 @@
 	  };
 	}
 
+	function userProfileSuccess(userProfile) {
+	  return {
+	    type: types.USER_PROFILE_SUCCESS,
+	    userProfile: userProfile
+	  };
+	}
+
 /***/ },
 /* 298 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(179);
+
+	var _userProfile = __webpack_require__(299);
+
+	var _userProfile2 = _interopRequireDefault(_userProfile);
+
+	var _userApi = __webpack_require__(271);
+
+	var userApi = _interopRequireWildcard(_userApi);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var UserProfileContainer = _react2.default.createClass({
+	  displayName: 'UserProfileContainer',
+
+
+	  componentDidMount: function componentDidMount() {
+	    userApi.getProfile(2);
+	  },
+
+	  render: function render() {
+	    return _react2.default.createElement(_userProfile2.default, this.props.profile);
+	  }
+
+	});
+
+	var mapStateToProps = function mapStateToProps(store) {
+	  return {
+	    profile: store.userState.userProfile
+	  };
+	};
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(UserProfileContainer);
+
+/***/ },
+/* 299 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	exports.default = function (props) {
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "user-profile" },
+	    _react2.default.createElement(
+	      "div",
+	      { className: "details" },
+	      _react2.default.createElement(
+	        "h1",
+	        null,
+	        props.name
+	      )
+	    )
+	  );
+	};
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ },
+/* 300 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(179);
+
+	var _userProfile = __webpack_require__(299);
+
+	var _userProfile2 = _interopRequireDefault(_userProfile);
+
+	var _userApi = __webpack_require__(271);
+
+	var userApi = _interopRequireWildcard(_userApi);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var UserProfileContainer = _react2.default.createClass({
+	  displayName: 'UserProfileContainer',
+
+
+	  componentDidMount: function componentDidMount() {
+	    var userId = this.props.params.userId;
+	    userApi.getProfile(userId);
+	  },
+
+	  render: function render() {
+	    return _react2.default.createElement(_userProfile2.default, this.props.profile);
+	  }
+
+	});
+
+	var mapStateToProps = function mapStateToProps(store) {
+	  return {
+	    profile: store.userState.userProfile
+	  };
+	};
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(UserProfileContainer);
+
+/***/ },
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var require;/* WEBPACK VAR INJECTION */(function(process, global) {/*!
@@ -46754,7 +46910,7 @@
 	function attemptVertx() {
 	  try {
 	    var r = require;
-	    var vertx = __webpack_require__(299);
+	    var vertx = __webpack_require__(302);
 	    vertxNext = vertx.runOnLoop || vertx.runOnContext;
 	    return useVertxTimer();
 	  } catch (e) {
@@ -47778,7 +47934,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), (function() { return this; }())))
 
 /***/ },
-/* 299 */
+/* 302 */
 /***/ function(module, exports) {
 
 	/* (ignored) */

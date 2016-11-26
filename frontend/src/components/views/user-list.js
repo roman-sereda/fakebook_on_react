@@ -11,7 +11,8 @@ export default function(props) {
         return (
           <div key={user.id} className="data-list-item">
             <div className="details">
-              <Link to={'/users/' + user.id}>{user.name}</Link>
+              {user.name}
+              <Link to={'/users/' + user.id}>{user.id}</Link>
               Fuck you
             </div>
           </div>

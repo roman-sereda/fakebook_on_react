@@ -6,3 +6,10 @@ export function getUsersSuccess(users) {
     users
   };
 }
+
+export function userProfileSuccess(userProfile) {
+  return {
+    type: types.USER_PROFILE_SUCCESS,
+    userProfile
+  };
+}
