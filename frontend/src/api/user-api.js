@@ -55,8 +55,9 @@ export function getProfile(userId) {
 
       let user = response.data;
       profile.name = user.name;
-      profile.twitter = user.twitter;
-      profile.worksOn = user.worksOn;
+      profile.surname = user.surname;
+      profile.email = user.email;
+      profile.avatar = user.avatar.url;
 
       // Then use the github attribute from the previous request to
       // sent two XHR requests to GitHub's API. The first for their

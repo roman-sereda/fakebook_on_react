@@ -46,7 +46,7 @@
 
 	__webpack_require__(1);
 	__webpack_require__(1);
-	(function webpackMissingModule() { throw new Error("Cannot find module \"bundle.js\""); }());
+	(function webpackMissingModule() { throw new Error("Cannot find module \"/../public/bundle.js\""); }());
 
 
 /***/ },
@@ -45103,8 +45103,9 @@
 
 	    var user = response.data;
 	    profile.name = user.name;
-	    profile.twitter = user.twitter;
-	    profile.worksOn = user.worksOn;
+	    profile.surname = user.surname;
+	    profile.email = user.email;
+	    profile.avatar = user.avatar.url;
 
 	    // Then use the github attribute from the previous request to
 	    // sent two XHR requests to GitHub's API. The first for their
@@ -46705,10 +46706,31 @@
 	      "div",
 	      { className: "details" },
 	      _react2.default.createElement(
+	        "div",
+	        null,
+	        "ddd"
+	      ),
+	      _react2.default.createElement(
 	        "h1",
 	        null,
 	        props.name
-	      )
+	      ),
+	      _react2.default.createElement(
+	        "h1",
+	        null,
+	        props.surname
+	      ),
+	      _react2.default.createElement(
+	        "h1",
+	        null,
+	        props.email
+	      ),
+	      _react2.default.createElement(
+	        "h1",
+	        null,
+	        props.avatar
+	      ),
+	      _react2.default.createElement("img", { alt: "Icon", src: props.avatar })
 	    )
 	  );
 	};
