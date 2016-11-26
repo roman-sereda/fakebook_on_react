@@ -14,10 +14,16 @@
 ActiveRecord::Schema.define(version: 20161126070552) do
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "surname"
-    t.string "email"
-    t.string "avatar"
+    t.string   "name"
+    t.string   "surname"
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "remember_token"
+    t.string   "avatar"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
+
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
 end
