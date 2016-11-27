@@ -1,5 +1,7 @@
 class UsersController < ActionController::Base
 
+  protect_from_forgery with: :exception
+
   def index
     @users = User.all
     render json: @users.to_json
@@ -13,7 +15,6 @@ class UsersController < ActionController::Base
   def create
     @user = User.new(user_params)
     if @user.save
-      @user.sign_in
       render json: @users.to_json
     else
       p @user.errors.full_messages

@@ -3,10 +3,6 @@ Rails.application.routes.draw do
   root "application#shit"
 
   resources :sessions, only: [:new, :create, :destroy]
-  
-  match '/signup',  to: 'users#new',            via: 'get'
-  match '/signin',  to: 'sessions#new',         via: 'get'
-  match '/signout', to: 'sessions#destroy',     via: 'delete'
 
   resources :users
   # The priority is based upon order of creation: first created -> highest priority.

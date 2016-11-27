@@ -9,6 +9,8 @@ require('es6-promise').polyfill();
 // the Router. We pass it a reference to the store so we can use react-redux's
 // connect() method for Component Containers.
 ReactDOM.render(
-  <Provider store={store}>{router}</Provider>,
+  <Provider store={store}>
+    {router}
+  </Provider>,
   document.getElementById('root')
 );

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import store from '../store';
-import { getUsersSuccess, createSessionSuccess, userProfileSuccess } from '../actions/user-actions';
+import { getUsersSuccess, createSessionSuccess, createUserSuccess, userProfileSuccess } from '../actions/user-actions';
 
 /**
  * Get all users
@@ -14,12 +14,25 @@ export function getUsers() {
     });
 }
 
-export function createSession(user2) {
+export function createUser(user2) {
   console.log(user2)
   return axios.post('http://localhost:3000/users', {user: user2})
     .then(response => {
-      store.dispatch(getUsersSuccess(response.data));
+      store.dispatch(createUserSuccess(response.data));
       return response;
+    });
+}
+
+export function createSession(user2) {
+  console.log(user2)
+  return axios.post('http://localhost:3000/sessions', {params: {email: user2.email, password: user2.password}})
+    .then(response => {
+      console.log("success");
+      store.dispatch(createSessionSuccess(response.data));
+      return response;
+    })
+    .catch(function(error) {
+        console.log(response.data);
     });
 }
 

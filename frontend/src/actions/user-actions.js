@@ -14,7 +14,14 @@ export function userProfileSuccess(userProfile) {
   };
 }
 
-export function createSessionSuccess(userProfile) {
+export function createUserSuccess(user) {
+  return {
+    type: types.CREATE_USER_SUCCESS,
+    user
+  };
+}
+
+export function createSessionSuccess(user) {
   return {
     type: types.CREATE_SESSION_SUCCESS,
     user
