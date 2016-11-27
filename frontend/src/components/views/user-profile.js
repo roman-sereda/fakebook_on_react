@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 // Using "Stateless Functional Components"
 export default function(props) {
@@ -11,6 +12,19 @@ export default function(props) {
         <h1>{props.email}</h1>
         <h1>{props.avatar}</h1>
         <img alt="Icon" src={props.avatar} />
+      </div>
+      <div>
+        {props.users.map(user => {
+          return (
+            <div key={user.id} className="data-list-item">
+              <div className="details">
+                {user.name}
+                <Link to={'/users/' + user.id}>{user.id}</Link>
+                Fuck you
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

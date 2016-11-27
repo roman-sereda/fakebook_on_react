@@ -6,12 +6,13 @@ import * as userApi from '../../api/user-api';
 const UserProfileContainer = React.createClass({
 
   componentDidMount: function() {
-    userApi.getProfile(2)
+    userApi.getProfile(2);
+    userApi.getUsers();
   },
 
   render: function() {
     return (
-      <UserProfile {...this.props.profile} />
+      <UserProfile {...this.props.profile} users={this.props.userList} />
     );
   }
 
@@ -19,7 +20,8 @@ const UserProfileContainer = React.createClass({
 
 const mapStateToProps = function(store) {
   return {
-    profile: store.userState.userProfile
+    profile: store.userState.userProfile,
+    userList: store.userState.users
   };
 };
 

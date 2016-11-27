@@ -14,6 +14,12 @@ const userReducer = function(state = initialState, action) {
 
     case types.USER_PROFILE_SUCCESS:
       return Object.assign({}, state, { userProfile: action.userProfile });
+
+    case types.CREATE_USER_SUCCESS:
+      return Object.assign({}, state, { user: action.user });
+
+      case types.CREATE_SESSION_SUCCESS:
+        return Object.assign({}, state, { user: action.user });
   }
 
   return state;

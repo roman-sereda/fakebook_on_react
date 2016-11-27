@@ -74,7 +74,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(306).polyfill();
+	__webpack_require__(307).polyfill();
 
 	// Provider is a top-level component that wrapps our entire application, including
 	// the Router. We pass it a reference to the store so we can use react-redux's
@@ -22992,6 +22992,12 @@
 
 	    case types.USER_PROFILE_SUCCESS:
 	      return Object.assign({}, state, { userProfile: action.userProfile });
+
+	    case types.CREATE_USER_SUCCESS:
+	      return Object.assign({}, state, { user: action.user });
+
+	    case types.CREATE_SESSION_SUCCESS:
+	      return Object.assign({}, state, { user: action.user });
 	  }
 
 	  return state;
@@ -40134,11 +40140,15 @@
 
 	var _currentUserProfileContainer2 = _interopRequireDefault(_currentUserProfileContainer);
 
-	var _signInContainer = __webpack_require__(302);
+	var _userProfileContainer = __webpack_require__(302);
+
+	var _userProfileContainer2 = _interopRequireDefault(_userProfileContainer);
+
+	var _signInContainer = __webpack_require__(303);
 
 	var _signInContainer2 = _interopRequireDefault(_signInContainer);
 
-	var _signUpContainer = __webpack_require__(304);
+	var _signUpContainer = __webpack_require__(305);
 
 	var _signUpContainer2 = _interopRequireDefault(_signUpContainer);
 
@@ -40154,11 +40164,16 @@
 	  _reactRouter.Router,
 	  { history: _reactRouter.browserHistory },
 	  _react2.default.createElement(
-	    _reactRouter.Router,
-	    { path: '/', component: _mainLayout2.default },
-	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _currentUserProfileContainer2.default, onEnter: requireAuth() }),
+	    _reactRouter.Route,
+	    { component: _mainLayout2.default },
+	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _currentUserProfileContainer2.default, onEnter: requireAuth() }),
 	    _react2.default.createElement(
-	      _reactRouter.Router,
+	      _reactRouter.Route,
+	      { path: 'users' },
+	      _react2.default.createElement(_reactRouter.Route, { path: ':userId', component: _userProfileContainer2.default })
+	    ),
+	    _react2.default.createElement(
+	      _reactRouter.Route,
 	      { path: '/auth', component: _auth2.default },
 	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _signInContainer2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/auth/signup', component: _signUpContainer2.default })
@@ -45109,6 +45124,7 @@
 
 	  componentDidMount: function componentDidMount() {
 	    userApi.getUsers();
+	    console.log(this.props.users);
 	  },
 
 	  render: function render() {
@@ -46803,6 +46819,8 @@
 	  value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -46827,17 +46845,19 @@
 
 	  componentDidMount: function componentDidMount() {
 	    userApi.getProfile(2);
+	    userApi.getUsers();
 	  },
 
 	  render: function render() {
-	    return _react2.default.createElement(_userProfile2.default, this.props.profile);
+	    return _react2.default.createElement(_userProfile2.default, _extends({}, this.props.profile, { users: this.props.userList }));
 	  }
 
 	});
 
 	var mapStateToProps = function mapStateToProps(store) {
 	  return {
-	    profile: store.userState.userProfile
+	    profile: store.userState.userProfile,
+	    userList: store.userState.users
 	  };
 	};
 
@@ -46847,7 +46867,7 @@
 /* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -46855,37 +46875,58 @@
 
 	exports.default = function (props) {
 	  return _react2.default.createElement(
-	    "div",
-	    { className: "user-profile" },
+	    'div',
+	    { className: 'user-profile' },
 	    _react2.default.createElement(
-	      "div",
-	      { className: "details" },
+	      'div',
+	      { className: 'details' },
 	      _react2.default.createElement(
-	        "h3",
+	        'h3',
 	        null,
-	        "Github Repos:"
+	        'Github Repos:'
 	      ),
 	      _react2.default.createElement(
-	        "h1",
+	        'h1',
 	        null,
 	        props.name
 	      ),
 	      _react2.default.createElement(
-	        "h1",
+	        'h1',
 	        null,
 	        props.surname
 	      ),
 	      _react2.default.createElement(
-	        "h1",
+	        'h1',
 	        null,
 	        props.email
 	      ),
 	      _react2.default.createElement(
-	        "h1",
+	        'h1',
 	        null,
 	        props.avatar
 	      ),
-	      _react2.default.createElement("img", { alt: "Icon", src: props.avatar })
+	      _react2.default.createElement('img', { alt: 'Icon', src: props.avatar })
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      props.users.map(function (user) {
+	        return _react2.default.createElement(
+	          'div',
+	          { key: user.id, className: 'data-list-item' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'details' },
+	            user.name,
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/users/' + user.id },
+	              user.id
+	            ),
+	            'Fuck you'
+	          )
+	        );
+	      })
 	    )
 	  );
 	};
@@ -46894,10 +46935,67 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(216);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
 /* 302 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(179);
+
+	var _userProfile = __webpack_require__(301);
+
+	var _userProfile2 = _interopRequireDefault(_userProfile);
+
+	var _userApi = __webpack_require__(273);
+
+	var userApi = _interopRequireWildcard(_userApi);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var UserProfileContainer = _react2.default.createClass({
+	  displayName: 'UserProfileContainer',
+
+
+	  componentDidMount: function componentDidMount() {
+	    var userId = this.props.params.userId;
+	    userApi.getProfile(userId);
+	    userApi.getUsers();
+	  },
+
+	  render: function render() {
+	    return _react2.default.createElement(_userProfile2.default, _extends({}, this.props.profile, { users: this.props.userList }));
+	  }
+
+	});
+
+	var mapStateToProps = function mapStateToProps(store) {
+	  return {
+	    profile: store.userState.userProfile,
+	    userList: store.userState.users
+	  };
+	};
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(UserProfileContainer);
+
+/***/ },
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -46912,7 +47010,7 @@
 
 	var _reactRedux = __webpack_require__(179);
 
-	var _createSession = __webpack_require__(303);
+	var _createSession = __webpack_require__(304);
 
 	var _createSession2 = _interopRequireDefault(_createSession);
 
@@ -46956,7 +47054,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(SignIn);
 
 /***/ },
-/* 303 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -47013,7 +47111,7 @@
 	});
 
 /***/ },
-/* 304 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47028,7 +47126,7 @@
 
 	var _reactRedux = __webpack_require__(179);
 
-	var _createUser = __webpack_require__(305);
+	var _createUser = __webpack_require__(306);
 
 	var _createUser2 = _interopRequireDefault(_createUser);
 
@@ -47075,7 +47173,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(SignUp);
 
 /***/ },
-/* 305 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -47138,7 +47236,7 @@
 	});
 
 /***/ },
-/* 306 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var require;/* WEBPACK VAR INJECTION */(function(process, global) {/*!
@@ -47277,7 +47375,7 @@
 	function attemptVertx() {
 	  try {
 	    var r = require;
-	    var vertx = __webpack_require__(307);
+	    var vertx = __webpack_require__(308);
 	    vertxNext = vertx.runOnLoop || vertx.runOnContext;
 	    return useVertxTimer();
 	  } catch (e) {
@@ -48301,7 +48399,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), (function() { return this; }())))
 
 /***/ },
-/* 307 */
+/* 308 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
