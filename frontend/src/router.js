@@ -11,7 +11,7 @@ import SignUp from './components/containers/sign-up-container';
 
 function requireAuth(){
   return (nextState, replace) => {
-  if (true)
+  if (false)
     replace({ pathname: "/auth", query: { return_to: nextState.location.pathname } });
   };
 }

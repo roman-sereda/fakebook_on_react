@@ -40146,7 +40146,7 @@
 
 	function requireAuth() {
 	  return function (nextState, replace) {
-	    if (true) replace({ pathname: "/auth", query: { return_to: nextState.location.pathname } });
+	    if (false) replace({ pathname: "/auth", query: { return_to: nextState.location.pathname } });
 	  };
 	}
 
@@ -45220,7 +45220,7 @@
 	    _store2.default.dispatch((0, _userActions.createSessionSuccess)(response.data));
 	    return response;
 	  }).catch(function (error) {
-	    console.log(error);
+	    console.log(response.data);
 	  });
 	}
 
