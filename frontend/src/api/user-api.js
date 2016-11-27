@@ -36,20 +36,10 @@ export function createSession(user2) {
     });
 }
 
-/**
- * Search users
-/**
- * getProfile() is much more complex because it has to make
- * three XHR requests to get all the profile info.
- */
-
 export function getProfile(userId) {
 
-  // Start with an empty profile object and build it up
-  // from multiple XHR requests.
   let profile = {};
 
-  // Get the user data from our local database.
   return axios.get('http://localhost:3000/users/' + userId)
     .then(response => {
 
@@ -59,9 +49,6 @@ export function getProfile(userId) {
       profile.email = user.email;
       profile.avatar = user.avatar.url;
 
-      // Then use the github attribute from the previous request to
-      // sent two XHR requests to GitHub's API. The first for their
-      // general user info, and the second for their repos.
       return Promise.all([
         axios.get('https://api.github.com/users/' + user.github),
         axios.get('https://api.github.com/users/' + user.github + '/repos')
@@ -78,7 +65,6 @@ export function getProfile(userId) {
         return;
 
       });
-
     });
 
 }

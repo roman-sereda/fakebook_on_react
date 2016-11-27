@@ -1,5 +1,11 @@
 class PostsController < ApplicationController
 
+  def index
+    @user = User.find(params[:user_id])
+    @posts = @user.posts
+    render json: @posts.to_json
+  end
+
   def new
     Post.create.params[post_params]
   end
