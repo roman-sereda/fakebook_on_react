@@ -1,21 +1,17 @@
 class SessionsController < ApplicationController
 
-  def new
-  end
-
   def create
-    @user = User.find_by(email: params[:session][:email].downcase)
+    @user = User.find_by(email: user_params[:email].downcase)
     p "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-    if @user && @user.authenticate(params[:session][:password])
-      sign_in @user
-      flash[:success] = "Profile Created"
-      redirect_to '/'
+    if @user && @user.authenticate(user_params[:password])
+      render json: @users.to_json
     end
+      render json: @users.to_json
+    else
   end
 
-  def destroy
-    sign_out
-    redirect_to root_url
+  def user_params
+    params.require(:user).permit(:email, :password)
   end
 
 end

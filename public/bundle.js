@@ -45282,12 +45282,10 @@
 
 	function createSession(user2) {
 	  console.log(user2);
-	  return _axios2.default.post('http://localhost:3000/sessions', { params: { email: user2.email, password: user2.password } }).then(function (response) {
+	  return _axios2.default.post('http://localhost:3000/sessions', { user: user2 }).then(function (response) {
 	    console.log("success");
 	    _store2.default.dispatch((0, _userActions.createSessionSuccess)(response.data));
 	    return response;
-	  }).catch(function (error) {
-	    console.log(response.data);
 	  });
 	}
 
@@ -46865,7 +46863,7 @@
 
 	var _reactRedux = __webpack_require__(179);
 
-	var _userProfile = __webpack_require__(302);
+	var _userProfile = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../views/user-profile\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var _userProfile2 = _interopRequireDefault(_userProfile);
 
@@ -46910,98 +46908,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(UserProfileContainer);
 
 /***/ },
-/* 302 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	exports.default = function (props) {
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'user-profile' },
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'details' },
-	      _react2.default.createElement(
-	        'h3',
-	        null,
-	        'Github Repos:'
-	      ),
-	      _react2.default.createElement(
-	        'h1',
-	        null,
-	        props.name
-	      ),
-	      _react2.default.createElement(
-	        'h1',
-	        null,
-	        props.surname
-	      ),
-	      _react2.default.createElement(
-	        'h1',
-	        null,
-	        props.email
-	      ),
-	      _react2.default.createElement(
-	        'h1',
-	        null,
-	        props.avatar
-	      ),
-	      _react2.default.createElement('img', { alt: 'Icon', src: props.avatar })
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      null,
-	      props.users.map(function (user) {
-	        return _react2.default.createElement(
-	          'div',
-	          { key: user.id, className: 'data-list-item' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'details' },
-	            user.name,
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/users/' + user.id },
-	              user.id
-	            ),
-	            'Fuck you'
-	          )
-	        );
-	      })
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'data-list' },
-	      props.posts.map(function (post) {
-	        return _react2.default.createElement(
-	          'div',
-	          { key: post.id, className: 'data-list-item' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'details' },
-	            post.title,
-	            'Fuck you'
-	          )
-	        );
-	      })
-	    )
-	  );
-	};
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(217);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ },
+/* 302 */,
 /* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -47073,7 +46980,7 @@
 
 	var _reactRedux = __webpack_require__(179);
 
-	var _userProfile = __webpack_require__(302);
+	var _userProfile = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../views/user-profile\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var _userProfile2 = _interopRequireDefault(_userProfile);
 
@@ -47098,6 +47005,7 @@
 	    userApi.getProfile(userId);
 	    userApi.getUsers();
 	    postApi.getPosts(userId);
+	    console.log(this.props.postList);
 	  },
 
 	  render: function render() {

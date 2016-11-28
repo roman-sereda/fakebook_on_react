@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+getNews: function(){
+
+}
+
 // Using "Stateless Functional Components"
 export default function(props) {
   return (
@@ -20,23 +24,22 @@ export default function(props) {
               <div className="details">
                 {user.name}
                 <Link to={'/users/' + user.id}>{user.id}</Link>
-                Fuck you
               </div>
             </div>
           );
         })}
       </div>
       <div className="data-list">
-        {props.posts.map(post => {
+        {if(props.posts != NULL){
+        props.posts.map(post => {
           return (
             <div key={post.id} className="data-list-item">
               <div className="details">
-                {post.title}
-                Fuck you
+                {post.title} {post.body}
               </div>
             </div>
           );
-        })}
+        })}}
       </div>
     </div>
   );

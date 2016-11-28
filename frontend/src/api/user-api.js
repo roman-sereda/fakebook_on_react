@@ -25,14 +25,11 @@ export function createUser(user2) {
 
 export function createSession(user2) {
   console.log(user2)
-  return axios.post('http://localhost:3000/sessions', {params: {email: user2.email, password: user2.password}})
+  return axios.post('http://localhost:3000/sessions', {user: user2})
     .then(response => {
       console.log("success");
       store.dispatch(createSessionSuccess(response.data));
       return response;
-    })
-    .catch(function(error) {
-        console.log(response.data);
     });
 }
 

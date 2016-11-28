@@ -11,6 +11,7 @@ const UserProfileContainer = React.createClass({
     userApi.getProfile(userId)
     userApi.getUsers()
     postApi.getPosts(userId)
+    console.log(this.props.postList)
   },
 
   render: function() {
