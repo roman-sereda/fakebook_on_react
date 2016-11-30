@@ -8,8 +8,8 @@ export default function(props) {
       <header className="primary-header"></header>
       <aside className="primary-aside">
         <ul>
-          <li><Link to="/" activeClassName="active">Auth</Link></li>
-          <li><Link to="/profile" activeClassName="active">Profile</Link></li>
+          <li><Link to="/users" activeClassName="active">All users</Link></li>
+          <li><Link to="/" activeClassName="active">Profile</Link></li>
         </ul>
       </aside>
       <main>

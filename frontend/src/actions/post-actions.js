@@ -6,3 +6,10 @@ export function getPostsSuccess(posts) {
     posts
   };
 }
+
+export function createPostSuccess(post) {
+  return {
+    type: types.CREATE_POST_SUCCESS,
+    post
+  };
+}

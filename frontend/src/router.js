@@ -20,7 +20,8 @@ function requireAuth(){
 export default (
   <Router history={browserHistory}>
       <Route component={MainLayout} >
-        <Route path="/" component={UsersContainer} onEnter={requireAuth()}>
+        <Route path="/" component={CurrentUserProfileContainer} onEnter={requireAuth()}>
+          <Route path="photos" component={UsersContainer} />
           <Route path="users" component={UsersContainer}>
             <Route path=":userId" component={UserProfileContainer} />
           </Route>

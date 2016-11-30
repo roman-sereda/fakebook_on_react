@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
 
-  root "application#shit"
+  root "users#home"
 
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: [:create, :destroy]
 
   resources :users do
     resources :posts
+    resources :photos
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

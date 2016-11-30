@@ -9,3 +9,11 @@ export function getPosts(userId) {
       return response;
     });
 }
+
+export function sendPost(userId) {
+  return axios.post('http://localhost:3000/users/' + userId + '/posts')
+    .then(response => {
+      store.dispatch(createPostSuccess(response.data));
+      return response;
+    });
+}

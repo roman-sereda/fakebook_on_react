@@ -11,6 +11,9 @@ const postReducer = function(state = initialState, action) {
 
     case types.GET_POSTS_SUCCESS:
       return Object.assign({}, state, { posts: action.posts });
+
+    case types.CREATE_POST_SUCCESS:
+      return Object.assign({}, state, { post: action.post });
   }
 
   return state;

@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router';
 
 
-// Using "Stateless Functional Components"
 export default function(props) {
   return (
     <div className="user-profile">
@@ -15,12 +14,11 @@ export default function(props) {
         <img alt="Icon" src={props.avatar} />
       </div>
       <div>
-        {props.users.map(user => {
+        {props.posts.map(post => {
           return (
-            <div key={user.id} className="data-list-item">
+            <div key={post.id} className="data-list-item">
               <div className="details">
-                {user.name}
-                <Link to={'/users/' + user.id}>{user.id}</Link>
+                {post.title} {post.body}
               </div>
             </div>
           );

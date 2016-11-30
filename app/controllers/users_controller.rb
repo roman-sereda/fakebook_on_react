@@ -1,12 +1,12 @@
-class UsersController < ActionController::Base
+class UsersController < ApplicationController
 
   def index
     @users = User.all
     render json: @users.to_json
   end
 
-  def new
-
+  def home
+    render 'home'
   end
 
   def show
