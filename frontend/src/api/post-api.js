@@ -1,6 +1,6 @@
 import axios from 'axios';
 import store from '../store';
-import { getPostsSuccess } from '../actions/post-actions';
+import { getPostsSuccess, createPostSuccess } from '../actions/post-actions';
 
 export function getPosts(userId) {
   return axios.get('http://localhost:3000/users/' + userId + '/posts')
@@ -10,8 +10,9 @@ export function getPosts(userId) {
     });
 }
 
-export function sendPost(userId) {
-  return axios.post('http://localhost:3000/users/' + userId + '/posts')
+export function sendPost(post2, userId) {
+  console.log(post2);
+  return axios.post('http://localhost:3000/users/' + userId + '/posts', {post: post2})
     .then(response => {
       store.dispatch(createPostSuccess(response.data));
       return response;

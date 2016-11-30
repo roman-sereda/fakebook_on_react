@@ -20,13 +20,16 @@ const UserProfileContainer = React.createClass({
     post.title = this.refs.child.getTitle();
     post.user_id = 2;
 
-    postApi.sendPost(2);
+    postApi.sendPost(post, 2);
+    postApi.getPosts(2);
   },
 
   render: function() {
     return (
-      <div><UserProfile {...this.props.profile} posts={this.props.postList} />
-      <PostForm onSubmit={this.onSubmit} ref="child" /></div>
+      <div>
+        <UserProfile {...this.props.profile} posts={this.props.postList} />
+        <PostForm onSubmit={this.onSubmit} ref="child" />
+      </div>
     );
   }
 

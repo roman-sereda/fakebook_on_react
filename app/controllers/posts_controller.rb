@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 
+  skip_before_action :verify_authenticity_token
+
   def index
     @user = User.find(params[:user_id])
     @posts = @user.posts
@@ -11,9 +13,10 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.create(post_params)
+    @post = User.find(params[:user_id]).posts.create(post_params)
     if @post.save
-
+      p "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"
+      render json: @post.to_json
     else
       render 'new'
     end
