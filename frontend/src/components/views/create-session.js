@@ -17,7 +17,7 @@ export default React.createClass({
         <div className="user-profile">
           <form onSubmit={this.props.onSubmit} className="search">
             <input type="text" ref="email" placeholder="Email" />
-            <input type="text" ref="password" placeholder="Password" />
+            <input type="password" ref="password" placeholder="Password" />
             <button>Log In</button>
           </form>
         </div>

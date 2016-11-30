@@ -1,1 +1,2 @@
-web: rails server -p $PORT
+web: rails s
+webpack: npm start

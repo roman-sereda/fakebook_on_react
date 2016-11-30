@@ -1,9 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-getNews: function(){
-
-}
 
 // Using "Stateless Functional Components"
 export default function(props) {
@@ -30,16 +27,6 @@ export default function(props) {
         })}
       </div>
       <div className="data-list">
-        {if(props.posts != NULL){
-        props.posts.map(post => {
-          return (
-            <div key={post.id} className="data-list-item">
-              <div className="details">
-                {post.title} {post.body}
-              </div>
-            </div>
-          );
-        })}}
       </div>
     </div>
   );

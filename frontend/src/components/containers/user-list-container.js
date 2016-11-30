@@ -8,7 +8,6 @@ const UserListContainer = React.createClass({
 
   componentDidMount: function() {
     userApi.getUsers();
-    console.log(this.props.users)
   },
 
   render: function() {

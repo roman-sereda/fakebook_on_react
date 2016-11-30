@@ -23023,11 +23023,14 @@
 	});
 	var GET_USERS_SUCCESS = exports.GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
 	var USER_PROFILE_SUCCESS = exports.USER_PROFILE_SUCCESS = 'USER_PROFILE_SUCCESS';
-
 	var CREATE_USER_SUCCESS = exports.CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS';
 	var CREATE_SESSION_SUCCESS = exports.CREATE_SESSION_SUCCESS = 'CREATE_SESSION_SUCCESS';
 
 	var GET_POSTS_SUCCESS = exports.GET_POSTS_SUCCESS = 'GET_POSTS_SUCCESS';
+
+	var GET_PHOTOS_SUCCESS = exports.GET_PHOTOS_SUCCESS = 'GET_PHOTOS_SUCCESS';
+
+	var GET_FRIENDSHIP_SUCCESS = exports.GET_FRIENDSHIP_SUCCESS = 'GET_FRIENDSHIP_SUCCESS';
 
 /***/ },
 /* 213 */
@@ -40217,17 +40220,20 @@
 	  _react2.default.createElement(
 	    _reactRouter.Route,
 	    { component: _mainLayout2.default },
-	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _currentUserProfileContainer2.default, onEnter: requireAuth() }),
 	    _react2.default.createElement(
 	      _reactRouter.Route,
-	      { path: 'users' },
-	      _react2.default.createElement(_reactRouter.Route, { path: ':userId', component: _userProfileContainer2.default })
+	      { path: '/', component: _userListContainer2.default, onEnter: requireAuth() },
+	      _react2.default.createElement(
+	        _reactRouter.Route,
+	        { path: 'users', component: _userListContainer2.default },
+	        _react2.default.createElement(_reactRouter.Route, { path: ':userId', component: _userProfileContainer2.default })
+	      )
 	    ),
 	    _react2.default.createElement(
 	      _reactRouter.Route,
 	      { path: 'auth', component: _auth2.default },
 	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _signInContainer2.default }),
-	      _react2.default.createElement(_reactRouter.Route, { path: 'signup', component: _signUpContainer2.default })
+	      _react2.default.createElement(_reactRouter.Route, { path: '/auth/signup', component: _signUpContainer2.default })
 	    )
 	  )
 	);
@@ -45175,7 +45181,6 @@
 
 	  componentDidMount: function componentDidMount() {
 	    userApi.getUsers();
-	    console.log(this.props.users);
 	  },
 
 	  render: function render() {
@@ -45205,25 +45210,33 @@
 	exports.default = function (props) {
 	  return _react2.default.createElement(
 	    'div',
-	    { className: 'data-list' },
-	    props.users.map(function (user) {
-
-	      return _react2.default.createElement(
-	        'div',
-	        { key: user.id, className: 'data-list-item' },
-	        _react2.default.createElement(
+	    null,
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      'Fuck You'
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'data-list' },
+	      props.users.map(function (user) {
+	        return _react2.default.createElement(
 	          'div',
-	          { className: 'details' },
-	          user.name,
+	          { key: user.id, className: 'data-list-item' },
 	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/users/' + user.id },
-	            user.id
-	          ),
-	          'Fuck you'
-	        )
-	      );
-	    })
+	            'div',
+	            { className: 'details' },
+	            user.name,
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/users/' + user.id },
+	              user.id
+	            ),
+	            'Fuck you'
+	          )
+	        );
+	      })
+	    )
 	  );
 	};
 
@@ -46863,7 +46876,7 @@
 
 	var _reactRedux = __webpack_require__(179);
 
-	var _userProfile = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../views/user-profile\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _userProfile = __webpack_require__(302);
 
 	var _userProfile2 = _interopRequireDefault(_userProfile);
 
@@ -46908,7 +46921,82 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(UserProfileContainer);
 
 /***/ },
-/* 302 */,
+/* 302 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	exports.default = function (props) {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'user-profile' },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'details' },
+	      _react2.default.createElement(
+	        'h3',
+	        null,
+	        'Github Repos:'
+	      ),
+	      _react2.default.createElement(
+	        'h1',
+	        null,
+	        props.name
+	      ),
+	      _react2.default.createElement(
+	        'h1',
+	        null,
+	        props.surname
+	      ),
+	      _react2.default.createElement(
+	        'h1',
+	        null,
+	        props.email
+	      ),
+	      _react2.default.createElement(
+	        'h1',
+	        null,
+	        props.avatar
+	      ),
+	      _react2.default.createElement('img', { alt: 'Icon', src: props.avatar })
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      props.users.map(function (user) {
+	        return _react2.default.createElement(
+	          'div',
+	          { key: user.id, className: 'data-list-item' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'details' },
+	            user.name,
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/users/' + user.id },
+	              user.id
+	            )
+	          )
+	        );
+	      })
+	    ),
+	    _react2.default.createElement('div', { className: 'data-list' })
+	  );
+	};
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(217);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ },
 /* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -46980,7 +47068,7 @@
 
 	var _reactRedux = __webpack_require__(179);
 
-	var _userProfile = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../views/user-profile\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _userProfile = __webpack_require__(302);
 
 	var _userProfile2 = _interopRequireDefault(_userProfile);
 
@@ -47127,7 +47215,7 @@
 	          "form",
 	          { onSubmit: this.props.onSubmit, className: "search" },
 	          _react2.default.createElement("input", { type: "text", ref: "email", placeholder: "Email" }),
-	          _react2.default.createElement("input", { type: "text", ref: "password", placeholder: "Password" }),
+	          _react2.default.createElement("input", { type: "password", ref: "password", placeholder: "Password" }),
 	          _react2.default.createElement(
 	            "button",
 	            null,

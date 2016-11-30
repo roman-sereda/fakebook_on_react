@@ -5,6 +5,10 @@ class UsersController < ActionController::Base
     render json: @users.to_json
   end
 
+  def new
+
+  end
+
   def show
     @user = User.find(params[:id])
     render json: @user.to_json
