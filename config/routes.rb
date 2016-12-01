@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root "users#home"
 
   resources :sessions, only: [:create, :destroy]
+  resources :friendships
 
   resources :users do
     resources :posts

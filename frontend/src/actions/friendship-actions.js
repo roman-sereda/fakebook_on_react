@@ -1,8 +1,8 @@
 import * as types from '../actions/action-types';
 
-export function getFriendshipSuccess(friendship) {
+export function sendFriendshipRequestSuccess(friendship) {
   return {
-    type: types.GET_FRIENDSHIP_SUCCESS,
+    type: types.SEND_FRIENDSHIP_REQUEST_SUCCESS,
     friendship
   };
 }

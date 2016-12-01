@@ -1,5 +1,6 @@
 class FriendshipsController < ApplicationController
   before_action :set_friendship, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token
 
   def index
     @friendships = Friendship.all
@@ -10,12 +11,13 @@ class FriendshipsController < ApplicationController
   end
 
   def create
-    @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
+    p "111111111111111"
+    @friendship = User.find(params[:user_id]).friendships.build(:friend_id => params[:friend_id])
     if @friendship.save
-      flash[:notice] = "Added friend."
-      redirect_to '/'
+      p "22222222222222"
+      render json: @friendship.to_json
     else
-      flash[:error] = "Unable to add friend."
+      render json: @friendship.to_json
     end
   end
 
@@ -29,9 +31,5 @@ class FriendshipsController < ApplicationController
   private
     def set_friendship
       @friendship = Friendship.find(params[:id])
-    end
-
-    def friendship_params
-      params.require(:friendship).permit(:user_id, :friend_id)
     end
 end
