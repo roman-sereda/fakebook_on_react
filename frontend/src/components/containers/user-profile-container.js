@@ -1,22 +1,38 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import UserProfile from '../views/user-profile';
+import PostForm from '../views/posts/post_form';
+import AddFriend from '../views/friendship/add_friend';
 import * as userApi from '../../api/user-api';
 import * as postApi from '../../api/post-api';
+import * as friendshipApi from '../../api/friendship-api';
 
 const UserProfileContainer = React.createClass({
 
   componentDidMount: function() {
-    let userId = this.props.params.userId
-    userApi.getProfile(userId)
-    userApi.getUsers()
-    postApi.getPosts(userId)
-    console.log(this.props.postList)
+    userApi.getProfile(userId);
+    postApi.getPosts(userId);
+  },
+
+  onSubmit: function(event){
+    event.preventDefault();
+
+    let post = {};
+    post.body = this.refs.child.getBody();
+    post.title = this.refs.child.getTitle();
+    post.user_id = userId;
+
+    postApi.sendPost(post, userId);
+    postApi.getPosts(userId);
   },
 
   render: function() {
     return (
-      <UserProfile {...this.props.profile} users={this.props.userList} posts={this.props.postList} />
+      <div>
+        <UserProfile {...this.props.profile} posts={this.props.postList}  />
+        <PostForm onSubmit={this.onSubmit} ref="child" />
+        <AddFriend onSubmitFriend={this.onSubmitFriend} />
+      </div>
     );
   }
 
@@ -25,8 +41,7 @@ const UserProfileContainer = React.createClass({
 const mapStateToProps = function(store) {
   return {
     profile: store.userState.userProfile,
-    userList: store.userState.users,
-    postList: store.userState.posts
+    postList: store.postState.posts
   };
 };
 

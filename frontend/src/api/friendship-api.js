@@ -1,11 +1,12 @@
 import axios from 'axios';
 import store from '../store';
-import { getFrienshipSuccess, sendFriendshipRequestSuccess } from '../actions/friendship-actions';
+import { getFriendshipSuccess, sendFriendshipRequestSuccess } from '../actions/friendship-actions';
 
-export function getFrienship() {
-  return axios.get('http://localhost:3000/frienship/')
+export function getFriendship(userId) {
+  console.log(userId)
+  return axios.get('http://localhost:3000/friendships/' + userId)
     .then(response => {
-      store.dispatch(getFrienshipSuccess(response.data));
+      store.dispatch(getFriendshipSuccess(response.data));
       return response;
     });
 }

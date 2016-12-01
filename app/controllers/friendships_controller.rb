@@ -10,11 +10,15 @@ class FriendshipsController < ApplicationController
     @friendship = Friendship.new
   end
 
+  def show
+    @friendship = User.find(params[:id]).friendships
+    render json: @friendship.to_json
+  end
+
   def create
-    p "111111111111111"
-    @friendship = User.find(params[:user_id]).friendships.build(:friend_id => params[:friend_id])
-    if @friendship.save
-      p "22222222222222"
+    @friendship = User.find(params[:user_id]).friendships.create(:friend_id => params[:friend_id])
+    @friendship2 = User.find(params[:friend_id]).friendships.create(:friend_id => params[:user_id])
+    if @friendship.save && @friendship2.save
       render json: @friendship.to_json
     else
       render json: @friendship.to_json

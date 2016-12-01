@@ -12,6 +12,8 @@ const UserProfileContainer = React.createClass({
   componentDidMount: function() {
     userApi.getProfile(2);
     postApi.getPosts(2);
+    friendshipApi.getFriendship(2);
+    console.log(this.props.friends);
   },
 
   onSubmit: function(event){
@@ -29,17 +31,13 @@ const UserProfileContainer = React.createClass({
   onSubmitFriend: function(event){
     event.preventDefault();
 
-    let friendship = {};
-    friendship.friend_id = 3;
-    friendship.user_id = 2;
-
     friendshipApi.sendFriendshipRequest(2,3);
   },
 
   render: function() {
     return (
       <div>
-        <UserProfile {...this.props.profile} posts={this.props.postList} />
+        <UserProfile {...this.props.profile} posts={this.props.postList}  friends={this.props.friends}/>
         <PostForm onSubmit={this.onSubmit} ref="child" />
         <AddFriend onSubmitFriend={this.onSubmitFriend} />
       </div>
@@ -51,7 +49,8 @@ const UserProfileContainer = React.createClass({
 const mapStateToProps = function(store) {
   return {
     profile: store.userState.userProfile,
-    postList: store.postState.posts
+    postList: store.postState.posts,
+    friends: store.friendshipState.friendship
   };
 };
 
