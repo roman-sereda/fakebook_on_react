@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  skip_before_action :verify_authenticity_token
+
   def index
     @users = User.all
     render json: @users.to_json
@@ -25,10 +27,8 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:user_id]);
-    p "33333333333333333333333333333"
+    @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      p "4444444444444444444444444444444"
       render json: @user.to_json
     else
       render json: @user.to_json
