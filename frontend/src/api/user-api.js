@@ -1,6 +1,6 @@
 import axios from 'axios';
 import store from '../store';
-import { getUsersSuccess, createSessionSuccess, createUserSuccess, userProfileSuccess } from '../actions/user-actions';
+import { getUsersSuccess, createSessionSuccess, createUserSuccess, userProfileSuccess, editUserSuccess } from '../actions/user-actions';
 
 /**
  * Get all users
@@ -19,6 +19,15 @@ export function createUser(user2) {
   return axios.post('http://localhost:3000/users', {user: user2})
     .then(response => {
       store.dispatch(createUserSuccess(response.data));
+      return response;
+    });
+}
+
+export function editUser(userId, user2) {
+  console.log(user2)
+  return axios.patch('http://localhost:3000/users/' + userId, {user: user2})
+    .then(response => {
+      store.dispatch(editUserSuccess(response.data));
       return response;
     });
 }

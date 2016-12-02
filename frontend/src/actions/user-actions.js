@@ -14,6 +14,13 @@ export function userProfileSuccess(userProfile) {
   };
 }
 
+export function editUserSuccess(user) {
+  return {
+    type: types.EDIT_USER_SUCCESS,
+    user
+  };
+}
+
 export function createUserSuccess(user) {
   return {
     type: types.CREATE_USER_SUCCESS,

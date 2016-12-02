@@ -24,6 +24,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    @user = User.find(params[:user_id]);
+    p "33333333333333333333333333333"
+    if @user.update_attributes(user_params)
+      p "4444444444444444444444444444444"
+      render json: @user.to_json
+    else
+      render json: @user.to_json
+    end
+  end
+
   def user_params
     params.require(:user).permit(:name, :surname, :email, :password, :password_confirmation)
   end

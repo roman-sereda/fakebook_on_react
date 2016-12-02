@@ -3,16 +3,23 @@ import { connect } from 'react-redux';
 import UserProfile from '../views/user-profile';
 import PostForm from '../views/posts/post_form';
 import AddFriend from '../views/friendship/add_friend';
+import EditForm from '../views/users/edit_form.js';
 import * as userApi from '../../api/user-api';
 import * as postApi from '../../api/post-api';
 import * as friendshipApi from '../../api/friendship-api';
 
 const UserProfileContainer = React.createClass({
+  getInitialState : function() {
+   return {
+     showReply : true
+   };
+ },
 
   componentDidMount: function() {
     userApi.getProfile(2);
     postApi.getPosts(2);
     friendshipApi.getFriendship(2);
+
     console.log(this.props.friends);
   },
 
@@ -34,12 +41,34 @@ const UserProfileContainer = React.createClass({
     friendshipApi.sendFriendshipRequest(2,3);
   },
 
+  UpdateUser: function(event){
+    event.preventDefault();
+
+    let user = {};
+    user.name = this.refs.u_child.getName();
+    user.surname = this.refs.u_child.getSurame();
+    user.email = this.refs.u_child.getEmail();
+    user.password = this.refs.u_child.getPassword();
+    user.password_confirmation = this.refs.u_child.getPasswordConf();
+
+    userApi.editUser(2, user);
+  },
+
+
+  onSubmitEdit: function(event){
+    event.preventDefault();
+    this.setState({
+      showReply : !this.state.showReply
+    });
+  },
+
   render: function() {
+    console.log(this.state.showReply)
     return (
       <div>
-        <UserProfile {...this.props.profile} posts={this.props.postList}  friends={this.props.friends}/>
+        <UserProfile {...this.props.profile} posts={this.props.postList}  friends={this.props.friends} onSubmitEdit={this.onSubmitEdit} />
+        <div className={this.state.showReply ? 'hidden' : ''}><EditForm UpdateUser = {this.UpdateUser} ref="u_child"/></div>
         <PostForm onSubmit={this.onSubmit} ref="child" />
-        <AddFriend onSubmitFriend={this.onSubmitFriend} />
       </div>
     );
   }

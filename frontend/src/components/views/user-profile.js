@@ -14,6 +14,14 @@ export default function(props) {
         <img alt="Icon" src={props.avatar} />
       </div>
       <div>
+        <div className="data-list">
+          <div>peluh Hyilo</div>
+          <form onSubmit={props.onSubmitEdit}>
+            <button>Edit profile</button>
+          </form>
+        </div>
+      </div>
+      <div>
         {props.posts.map(post => {
           return (
             <div key={post.id} className="data-list-item">
