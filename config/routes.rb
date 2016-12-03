@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   root "users#home"
 
+  get 'islogged' => 'users#iflogged'
+  match '/signout', to: 'sessions#destroy',     via: 'delete'
+
   resources :sessions, only: [:create, :destroy]
   resources :friendships
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import * as userApi from '../../api/user-api';
 
 export default function(props) {
   return (
@@ -10,6 +11,7 @@ export default function(props) {
           <li><Link to="/users" activeClassName="active">All users</Link></li>
           <li><Link to="/" activeClassName="active">Profile</Link></li>
           <li><Link to="/gallery" activeClassName="active">All users</Link></li>
+          <li>><Link to='/signout' >Sign Out</Link></li>
         </ul>
       </aside>
       <main>

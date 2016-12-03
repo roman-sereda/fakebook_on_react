@@ -11,6 +11,12 @@ class UsersController < ApplicationController
     render 'home'
   end
 
+  def iflogged
+    p "#{true}"
+    a = true
+    render json: (a).to_json
+  end
+
   def show
     @user = User.find(params[:id])
     render json: @user.to_json

@@ -7,6 +7,20 @@ export function getUsersSuccess(users) {
   };
 }
 
+export function signOutSuccess(logged) {
+  return {
+    type: types.SIGN_OUT_SUCCESS,
+    logged
+  };
+}
+
+export function getIfLoggedInSuccess(logged) {
+  return {
+    type: types.GET_IF_LOGGED_IN_SUCCESS,
+    logged
+  };
+}
+
 export function userProfileSuccess(userProfile) {
   return {
     type: types.USER_PROFILE_SUCCESS,
