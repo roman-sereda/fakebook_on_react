@@ -1,4 +1,5 @@
 import React from 'react';
+import store from '../../store';
 import { connect } from 'react-redux';
 import UserProfile from '../views/user-profile';
 import PostForm from '../views/posts/post_form';
@@ -19,12 +20,12 @@ const UserProfileContainer = React.createClass({
  },
 
   componentDidMount: function() {
-    userApi.getProfile(2);
-    postApi.getPosts(3);
-    friendshipApi.getFriendship(2);
-    photoApi.getPhotos(2);
-
-    console.log(this.props.photoList);
+    userApi.getCurrentUser();
+    let user = store.getState().userState.current_user;
+    userApi.getProfile(user.id);
+    postApi.getPosts(user.id);
+    friendshipApi.getFriendship(user.id);
+    photoApi.getPhotos(user.id);
   },
 
   onSubmit: function(event){

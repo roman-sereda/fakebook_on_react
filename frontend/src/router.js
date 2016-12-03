@@ -6,19 +6,17 @@ import LayoutAuth from './components/layouts/auth'
 import UsersContainer from './components/containers/user-list-container';
 import CurrentUserProfileContainer from './components/containers/current-user-profile-container';
 import UserProfileContainer from './components/containers/user-profile-container';
-
-import LogOut from './components/containers/logout';
-
+import store from './store';
 import SignIn from './components/containers/sign-in-container';
 import SignUp from './components/containers/sign-up-container';
 
 import * as userApi from './api/user-api';
 
 function requireAuth(){
-  var log = userApi.logged
-  console.log(log)
+  userApi.getIfLoggedIn();
+  console.log(!store.getState().userState.logged)
   return (nextState, replace) => {
-  if (log)
+  if (!store.getState().userState.logged)
     replace({ pathname: "/auth", query: { return_to: nextState.location.pathname } });
   };
 }
@@ -38,8 +36,6 @@ export default (
       <IndexRoute component={SignIn} />
       <Route path="/auth/signup" component={SignUp} />
     </Route>
-
-    <Route path="/signout" component={LogOut} />
 
   </Router>
 );

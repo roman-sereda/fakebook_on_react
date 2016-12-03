@@ -1,6 +1,6 @@
 import axios from 'axios';
 import store from '../store';
-import { signOutSuccess, getUsersSuccess, createSessionSuccess, createUserSuccess, userProfileSuccess, editUserSuccess, getIfLoggedInSuccess } from '../actions/user-actions';
+import { getCurrentUserSuccess, signOutSuccess, getUsersSuccess, createSessionSuccess, createUserSuccess, userProfileSuccess, editUserSuccess, getIfLoggedInSuccess } from '../actions/user-actions';
 
 export function getIfLoggedIn() {
   return axios.get('http://localhost:3000/islogged')
@@ -14,6 +14,14 @@ export function signOut() {
   return axios.delete('http://localhost:3000/signout')
     .then(response => {
       store.dispatch(signOutSuccess(response.data));
+      return response;
+    });
+}
+
+export function getCurrentUser() {
+  return axios.get('http://localhost:3000/current_user')
+    .then(response => {
+      store.dispatch(getCurrentUserSuccess(response.data));
       return response;
     });
 }

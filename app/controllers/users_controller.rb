@@ -11,10 +11,14 @@ class UsersController < ApplicationController
     render 'home'
   end
 
+  def get_current_user
+    p "current_user: #{current_user}"
+    render json: current_user
+  end
+
   def iflogged
-    p "#{true}"
-    a = true
-    render json: (a).to_json
+    p "current_user: #{defined?(current_user)}"
+    render json: (defined?(current_user) == nil ? false : true).to_json
   end
 
   def show

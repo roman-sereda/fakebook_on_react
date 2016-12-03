@@ -1,7 +1,14 @@
 import React from 'react';
+import {browserHistory} from 'react-router'
+import { push } from 'react-redux';
+import {Router} from 'react-router'
 import { connect } from 'react-redux';
 import CreateSession from '../views/create-session';
 import * as userApi from '../../api/user-api';
+
+static contextTypes = {
+  router: React.PropTypes.object.isRequired
+}
 
 const SignIn = React.createClass({
 
@@ -13,6 +20,8 @@ const SignIn = React.createClass({
     user.password = this.refs.child.getPassword();
 
     userApi.createSession(user)
+    userApi.getIfLoggedIn();
+    this.context.router.push('/');
   },
 
   render: function() {

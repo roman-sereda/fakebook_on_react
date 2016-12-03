@@ -7,6 +7,13 @@ export function getUsersSuccess(users) {
   };
 }
 
+export function getCurrentUserSuccess(current_user) {
+  return {
+    type: types.CURRENT_USER_SUCCESS,
+    current_user
+  };
+}
+
 export function signOutSuccess(logged) {
   return {
     type: types.SIGN_OUT_SUCCESS,
@@ -15,6 +22,7 @@ export function signOutSuccess(logged) {
 }
 
 export function getIfLoggedInSuccess(logged) {
+  console.log(logged)
   return {
     type: types.GET_IF_LOGGED_IN_SUCCESS,
     logged

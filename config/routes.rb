@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get 'islogged' => 'users#iflogged'
   match '/signout', to: 'sessions#destroy',     via: 'delete'
+  match '/current_user', to: 'users#get_current_user', via: 'get'
 
   resources :sessions, only: [:create, :destroy]
   resources :friendships
