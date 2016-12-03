@@ -5,6 +5,7 @@ import PostForm from '../views/posts/post_form';
 import AddFriend from '../views/friendship/add_friend';
 import EditForm from '../views/users/edit_form';
 import ProfilePhotos from '../views/photos/profile_photos';
+import AddPhoto from '../views/photos/form';
 import * as userApi from '../../api/user-api';
 import * as postApi from '../../api/post-api';
 import * as photoApi from '../../api/photo-api';
@@ -19,7 +20,7 @@ const UserProfileContainer = React.createClass({
 
   componentDidMount: function() {
     userApi.getProfile(2);
-    postApi.getPosts(2);
+    postApi.getPosts(3);
     friendshipApi.getFriendship(2);
     photoApi.getPhotos(2);
 
@@ -65,13 +66,24 @@ const UserProfileContainer = React.createClass({
     });
   },
 
+  AddImage: function(event){
+    event.preventDefault();
+
+    let photo = {};
+    photo.user_id = 2;
+    photo.image = this.refs.p_child.getImage();
+
+    photoApi.sendPhoto(2, photo);
+  },
+
   render: function() {
     return (
       <div>
         <UserProfile {...this.props.profile} posts={this.props.postList}  friends={this.props.friends} onSubmitEdit={this.onSubmitEdit} />
         <div className={this.state.showReply ? 'hidden' : ''}><EditForm UpdateUser = {this.UpdateUser} ref="u_child"/></div>
         <PostForm onSubmit={this.onSubmit} ref="child" />
-        <ProfilePhotos photos={this.props.photoList}/>
+        <ProfilePhotos photos={this.props.photoList} />
+        <AddPhoto AddImage={this.AddImage} ref="p_child" />
       </div>
     );
   }

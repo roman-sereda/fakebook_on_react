@@ -6,3 +6,10 @@ export function getPhotosSuccess(photos) {
     photos
   };
 }
+
+export function sendPhotoSuccess(photo) {
+  return {
+    type: types.SEND_PHOTO_SUCCESS,
+    photo
+  };
+}

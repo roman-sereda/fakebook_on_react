@@ -11,6 +11,10 @@ const photoReducer = function(state = initialState, action) {
 
     case types.GET_PHOTOS_SUCCESS:
       return Object.assign({}, state, { photos: action.photos });
+
+    case types.SEND_PHOTO_SUCCESS:
+      return Object.assign({}, state, { photo: action.photo });
+
   }
 
   return state;

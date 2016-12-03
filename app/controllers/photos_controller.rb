@@ -10,11 +10,13 @@ class PhotosController < ApplicationController
 
   def create
     @photo = User.find(params[:user_id]).photos.create(photo_params)
-    if @photo.save
 
-      render json: @post.to_json
+    if @photo.save
+      p "PHOTO IS SAVED"
+      render json: @photo.to_json
     else
-      render 'new'
+      p "PHOTO NOT SAVED"
+      render json: @photo.to_json
     end
   end
 

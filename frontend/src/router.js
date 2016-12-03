@@ -22,7 +22,8 @@ export default (
       <Route component={MainLayout} >
         <Route path="/" component={CurrentUserProfileContainer} onEnter={requireAuth()}>
           <Route path="photos" component={UsersContainer} />
-          <Route path="users" component={UsersContainer}>
+          <Route path="users">
+            <IndexRoute component={UsersContainer} />
             <Route path=":userId" component={UserProfileContainer} />
           </Route>
         </Route>
