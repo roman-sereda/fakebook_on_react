@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-// Using "Stateless Functional Components"
 export default function(props) {
   return (
     <div className="app">
@@ -10,6 +9,7 @@ export default function(props) {
         <ul>
           <li><Link to="/users" activeClassName="active">All users</Link></li>
           <li><Link to="/" activeClassName="active">Profile</Link></li>
+          <li><Link to="/gallery" activeClassName="active">All users</Link></li>
         </ul>
       </aside>
       <main>

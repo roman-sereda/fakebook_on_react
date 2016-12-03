@@ -12,26 +12,25 @@ import SignUp from './components/containers/sign-up-container';
 
 function requireAuth(){
   return (nextState, replace) => {
-  if (false)
+  if (true)
     replace({ pathname: "/auth", query: { return_to: nextState.location.pathname } });
   };
 }
 
 export default (
   <Router history={browserHistory}>
-      <Route component={MainLayout} >
-        <Route path="/" component={CurrentUserProfileContainer} onEnter={requireAuth()}>
-          <Route path="photos" component={UsersContainer} />
-          <Route path="users">
-            <IndexRoute component={UsersContainer} />
-            <Route path=":userId" component={UserProfileContainer} />
-          </Route>
+    <Route component={MainLayout}>
+      <Route path="/" component={CurrentUserProfileContainer} onEnter={requireAuth()}/>
+
+        <Route path="users">
+          <IndexRoute component={UsersContainer} />
+          <Route path=":userId" component={UserProfileContainer} />
         </Route>
 
-        <Route path="auth" component={LayoutAuth}>
-          <IndexRoute component={SignIn} />
-          <Route path="/auth/signup" component={SignUp} />
-        </Route>
+    </Route>
+    <Route path="auth" component={LayoutAuth}>
+      <IndexRoute component={SignIn} />
+      <Route path="/auth/signup" component={SignUp} />
     </Route>
   </Router>
 );

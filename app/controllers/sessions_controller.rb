@@ -1,12 +1,14 @@
 class SessionsController < ApplicationController
 
+  skip_before_action :verify_authenticity_token
+
   def create
     @user = User.find_by(email: user_params[:email].downcase)
     p "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
     if @user && @user.authenticate(user_params[:password])
-      render json: @users.to_json
+      render json: @user.to_json
     end
-      render json: @users.to_json
+      render json: @user.to_json
     else
   end
 
