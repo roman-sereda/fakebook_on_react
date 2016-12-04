@@ -3,10 +3,9 @@ import store from '../../store';
 import { connect } from 'react-redux';
 import UserProfile from '../views/user-profile';
 import Posts from './posts-container'
+import Gallery from './gallery-container'
 import Friends from './friends-container'
 import EditForm from '../views/users/edit_form';
-import ProfilePhotos from '../views/photos/profile_photos';
-import AddPhoto from '../views/photos/form';
 import * as userApi from '../../api/user-api';
 import * as photoApi from '../../api/photo-api';
 
@@ -20,8 +19,6 @@ const UserProfileContainer = React.createClass({
   componentDidMount: function() {
     userApi.getCurrentUser();
     userApi.getProfile(this.props.user.id);
-    friendshipApi.getFriendship(this.props.user.id);
-    photoApi.getPhotos(this.props.user.id);
   },
 
   UpdateUser: function(event){
@@ -45,16 +42,6 @@ const UserProfileContainer = React.createClass({
     });
   },
 
-  AddImage: function(event){
-    event.preventDefault();
-
-    let photo = {};
-    photo.user_id = this.props.user.id;
-    photo.image = this.refs.p_child.getImage();
-
-    photoApi.sendPhoto(this.props.user.id, photo);
-  },
-
   render: function() {
     return (
       <div>
@@ -62,8 +49,7 @@ const UserProfileContainer = React.createClass({
         <div className={this.state.showReply ? 'hidden' : ''}><EditForm UpdateUser = {this.UpdateUser} ref="u_child"/></div>
         <Posts />
         <Friends />
-        <ProfilePhotos photos={this.props.photoList} />
-        <AddPhoto AddImage={this.AddImage} ref="p_child" />
+        <Gallery />
       </div>
     );
   }
@@ -73,8 +59,6 @@ const UserProfileContainer = React.createClass({
 const mapStateToProps = function(store) {
   return {
     profile: store.userState.userProfile,
-    photoList: store.photoState.photos,
-    user: store.userState.current_user
   };
 };
 
