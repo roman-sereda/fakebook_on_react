@@ -20,6 +20,9 @@
  background-color: rgba(36,61,89,0.25);
 }
 
+.post_user_avatar{
+  max-height: 50px;
+}
 
 
 .log-form{
