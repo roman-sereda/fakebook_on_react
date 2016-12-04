@@ -16,14 +16,14 @@ class UsersController < ApplicationController
     render json: current_user
   end
 
+  def show
+    @user = User.find(params[:id])
+    render json: @user
+  end
+
   def iflogged
     p "current_user: #{defined?(current_user)}"
     render json: (defined?(current_user) == nil ? false : true).to_json
-  end
-
-  def show
-    @user = User.find(params[:id])
-    render json: @user.to_json
   end
 
   def create
