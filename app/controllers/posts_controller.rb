@@ -5,6 +5,10 @@ class PostsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @posts = @user.posts
+    @posts.each do |post|
+      post.user = User.find(params[:user_id])
+    end
+
     render json: @posts.to_json
   end
 

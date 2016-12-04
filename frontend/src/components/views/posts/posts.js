@@ -7,7 +7,7 @@ export default function(props) {
         return (
           <div key={post.id} className="data-list-item">
             <div className="details">
-              {post.title} {post.body}
+              {post.title} {post.body} {post.author}
             </div>
           </div>
         );

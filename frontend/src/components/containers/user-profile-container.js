@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import UserProfile from '../views/user-profile';
+import UserProfile from '../views/users/profile';
 import PostForm from '../views/posts/form';
 import AddFriend from '../views/friendship/add_friend';
-import EditForm from '../views/users/edit_form';
+import EditForm from '../views/users/form';
 import ProfilePhotos from '../views/photos/photos';
 import AddPhoto from '../views/photos/add_photo';
 import * as userApi from '../../api/user-api';
