@@ -27,7 +27,13 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+      @user = User.create(name: user_params[:name],
+                       surname: user_params[:surname],
+                       email: user_params[:email],
+                       password: user_params[:password],
+                       password_confirmation: user_params[:password_confirmation],
+                       avatar: File.open('default-avatar.jpg'))
+
     if @user.save
       render json: @users.to_json
     else
