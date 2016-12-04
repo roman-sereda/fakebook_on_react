@@ -5,23 +5,15 @@ import { Link } from 'react-router';
 export default function(props) {
   return (
     <div className="user-profile">
-      <div className="details">
-        <h3>Github Repos:</h3>
-        <h1>{props.name}</h1>
-        <h1>{props.surname}</h1>
-        <h1>{props.email}</h1>
-        <h1>{props.avatar}</h1>
+      <div className="profile-info">
         <img alt="Icon" src={props.avatar} />
+        <h1>{props.name} {props.surname}</h1>
+        <h1>{props.email}</h1>
+        <form onSubmit={props.onSubmitEdit}>
+          <button>Edit profile</button>
+        </form>
       </div>
-      <div>
-        <div className="data-list">
-          <div>peluh Hyilo</div>
-          <form onSubmit={props.onSubmitEdit}>
-            <button>Edit profile</button>
-          </form>
-        </div>
-      </div>
-      <div>
+      <div className="profile-news">
         {props.posts.map(post => {
           return (
             <div key={post.id} className="data-list-item">
@@ -32,7 +24,7 @@ export default function(props) {
           );
         })}
       </div>
-      <div>
+      <div className = 'profile-list-friends'>
         {props.friends.map(friend => {
           return (
             <div key={friend.id} className="data-list-item">
@@ -42,8 +34,6 @@ export default function(props) {
             </div>
           );
         })}
-      </div>
-      <div className="data-list">
       </div>
     </div>
   );

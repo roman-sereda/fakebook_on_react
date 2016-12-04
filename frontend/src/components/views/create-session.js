@@ -12,13 +12,13 @@ export default React.createClass({
 
   render: function() {
     return (
-      <div>
+      <div className="log-form">
         <div>Log In</div>
-        <div className="user-profile">
-          <form onSubmit={this.props.onSubmit} className="search">
-            <input type="text" ref="email" placeholder="Email" />
-            <input type="password" ref="password" placeholder="Password" />
-            <button>Log In</button>
+        <div className="">
+          <form onSubmit={this.props.onSubmit} className="">
+            <p><input type="text" ref="email" placeholder="" /></p>
+            <p><input type="password" ref="password" placeholder="" /></p>
+            <p><button>Log In</button></p>
           </form>
         </div>
       </div>
