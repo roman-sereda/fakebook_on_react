@@ -16,7 +16,7 @@ gem 'bcrypt-ruby', '>=3.1.2'
 gem 'react-rails', '~> 1.0'
 gem 'will_paginate', '~> 3.0.7'
 gem 'react-router-rails'
-gem 'bootstrap'
+gem 'bootstrap-sass'
 
 
 

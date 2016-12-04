@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+require("css!./stylesheet.css");
 
 module.exports = {
   entry: './src/app.js',

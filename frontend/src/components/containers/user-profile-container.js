@@ -21,7 +21,6 @@ const UserProfileContainer = React.createClass({
   componentDidMount: function() {
     let userId = this.props.params.userId
 
-    
     userApi.getProfile(userId);
     postApi.getPosts(userId);
     friendshipApi.getFriendship(userId);
@@ -45,7 +44,9 @@ const UserProfileContainer = React.createClass({
   onSubmitFriend: function(event){
     event.preventDefault();
 
-    friendshipApi.sendFriendshipRequest(userId,3);
+    let user = store.getState().userState.current_user;
+
+    friendshipApi.sendFriendshipRequest(userId,user);
   },
 
   UpdateUser: function(event){
@@ -85,6 +86,7 @@ const UserProfileContainer = React.createClass({
         <UserProfile {...this.props.profile} posts={this.props.postList}  friends={this.props.friends} onSubmitEdit={this.onSubmitEdit} />
         <div className={this.state.showReply ? 'hidden' : ''}><EditForm UpdateUser = {this.UpdateUser} ref="u_child"/></div>
         <PostForm onSubmit={this.onSubmit} ref="child" />
+        <AddFriend onSubmitFriend={this.props.onSubmitFriend} />
         <ProfilePhotos photos={this.props.photoList} />
         <AddPhoto AddImage={this.AddImage} ref="p_child" />
       </div>

@@ -21,11 +21,10 @@ const UserProfileContainer = React.createClass({
 
   componentDidMount: function() {
     userApi.getCurrentUser();
-    let user = store.getState().userState.current_user;
-    userApi.getProfile(user.id);
-    postApi.getPosts(user.id);
-    friendshipApi.getFriendship(user.id);
-    photoApi.getPhotos(user.id);
+    userApi.getProfile(this.props.user.id);
+    postApi.getPosts(this.props.user.id);
+    friendshipApi.getFriendship(this.props.user.id);
+    photoApi.getPhotos(this.props.user.id);
   },
 
   onSubmit: function(event){
@@ -34,16 +33,18 @@ const UserProfileContainer = React.createClass({
     let post = {};
     post.body = this.refs.child.getBody();
     post.title = this.refs.child.getTitle();
-    post.user_id = 2;
+    post.user_id = this.props.user.id;
 
-    postApi.sendPost(post, 2);
-    postApi.getPosts(2);
+    postApi.sendPost(post, this.props.user.id);
+    postApi.getPosts(this.props.user.id);
   },
 
   onSubmitFriend: function(event){
     event.preventDefault();
 
-    friendshipApi.sendFriendshipRequest(2,3);
+    let userId = this.props.params.userId
+
+    friendshipApi.sendFriendshipRequest(this.props.user.id, userId);
   },
 
   UpdateUser: function(event){
@@ -56,7 +57,7 @@ const UserProfileContainer = React.createClass({
     user.password = this.refs.u_child.getPassword();
     user.password_confirmation = this.refs.u_child.getPasswordConf();
 
-    userApi.editUser(2, user);
+    userApi.editUser(this.props.user.id, user);
   },
 
 
@@ -71,10 +72,10 @@ const UserProfileContainer = React.createClass({
     event.preventDefault();
 
     let photo = {};
-    photo.user_id = 2;
+    photo.user_id = this.props.user.id;
     photo.image = this.refs.p_child.getImage();
 
-    photoApi.sendPhoto(2, photo);
+    photoApi.sendPhoto(this.props.user.id, photo);
   },
 
   render: function() {
@@ -83,6 +84,7 @@ const UserProfileContainer = React.createClass({
         <UserProfile {...this.props.profile} posts={this.props.postList}  friends={this.props.friends} onSubmitEdit={this.onSubmitEdit} />
         <div className={this.state.showReply ? 'hidden' : ''}><EditForm UpdateUser = {this.UpdateUser} ref="u_child"/></div>
         <PostForm onSubmit={this.onSubmit} ref="child" />
+        <AddFriend onSubmitFriend={this.props.onSubmitFriend} />
         <ProfilePhotos photos={this.props.photoList} />
         <AddPhoto AddImage={this.AddImage} ref="p_child" />
       </div>
@@ -96,7 +98,8 @@ const mapStateToProps = function(store) {
     profile: store.userState.userProfile,
     postList: store.postState.posts,
     friends: store.friendshipState.friendship,
-    photoList: store.photoState.photos
+    photoList: store.photoState.photos,
+    user: store.userState.current_user
   };
 };
 
