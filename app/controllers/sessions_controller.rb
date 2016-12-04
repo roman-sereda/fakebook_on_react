@@ -4,14 +4,12 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by(email: user_params[:email].downcase)
-
     if @user && @user.authenticate(user_params[:password])
-
       sign_in(@user)
-      render json: (true).to_json
-    end
-      render json: (true).to_json
+      render json: current_user.to_json
     else
+      render json: current_user.to_json
+    end
   end
 
   def destroy

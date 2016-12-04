@@ -14,18 +14,10 @@ export function getCurrentUserSuccess(current_user) {
   };
 }
 
-export function signOutSuccess(logged) {
+export function signOutSuccess(user) {
   return {
     type: types.SIGN_OUT_SUCCESS,
-    logged
-  };
-}
-
-export function getIfLoggedInSuccess(logged) {
-  console.log(logged)
-  return {
-    type: types.GET_IF_LOGGED_IN_SUCCESS,
-    logged
+    user
   };
 }
 

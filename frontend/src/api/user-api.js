@@ -1,14 +1,6 @@
 import axios from 'axios';
 import store from '../store';
-import { getCurrentUserSuccess, signOutSuccess, getUsersSuccess, createSessionSuccess, createUserSuccess, userProfileSuccess, editUserSuccess, getIfLoggedInSuccess } from '../actions/user-actions';
-
-export function getIfLoggedIn() {
-  return axios.get('http://localhost:3000/islogged')
-    .then(response => {
-      store.dispatch(getIfLoggedInSuccess(response.data));
-      return response;
-    });
-}
+import { getCurrentUserSuccess, signOutSuccess, getUsersSuccess, createSessionSuccess, createUserSuccess, userProfileSuccess, editUserSuccess } from '../actions/user-actions';
 
 export function signOut() {
   return axios.delete('http://localhost:3000/signout')

@@ -9,22 +9,12 @@ import UserProfileContainer from './components/containers/user-profile-container
 import store from './store';
 import SignIn from './components/containers/sign-in-container';
 import SignUp from './components/containers/sign-up-container';
-
-import * as userApi from './api/user-api';
-
-function requireAuth(){
-  userApi.getIfLoggedIn();
-  console.log(!store.getState().userState.logged)
-  return (nextState, replace) => {
-  if (!store.getState().userState.logged)
-    replace({ pathname: "/auth", query: { return_to: nextState.location.pathname } });
-  };
-}
+import Temp from './components/containers/temp';
 
 export default (
   <Router history={hashHistory}>
     <Route component={MainLayout}>
-      <Route path="/" component={CurrentUserProfileContainer} onEnter={requireAuth()}/>
+      <Route path="/" component={Temp} />
 
         <Route path="users">
           <IndexRoute component={UsersContainer} />
