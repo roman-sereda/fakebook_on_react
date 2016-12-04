@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import UserProfile from '../views/user-profile';
-import PostForm from '../views/posts/post_form';
+import PostForm from '../views/posts/form';
 import AddFriend from '../views/friendship/add_friend';
 import EditForm from '../views/users/edit_form';
 import ProfilePhotos from '../views/photos/profile_photos';

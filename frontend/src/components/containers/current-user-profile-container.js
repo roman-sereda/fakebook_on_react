@@ -2,7 +2,7 @@ import React from 'react';
 import store from '../../store';
 import { connect } from 'react-redux';
 import UserProfile from '../views/user-profile';
-import PostForm from '../views/posts/post_form';
+import Posts from './posts-container'
 import AddFriend from '../views/friendship/add_friend';
 import EditForm from '../views/users/edit_form';
 import ProfilePhotos from '../views/photos/profile_photos';
@@ -81,9 +81,9 @@ const UserProfileContainer = React.createClass({
   render: function() {
     return (
       <div>
-        <UserProfile {...this.props.profile} posts={this.props.postList}  friends={this.props.friends} onSubmitEdit={this.onSubmitEdit} />
+        <UserProfile {...this.props.profile} friends={this.props.friends} onSubmitEdit={this.onSubmitEdit} />
         <div className={this.state.showReply ? 'hidden' : ''}><EditForm UpdateUser = {this.UpdateUser} ref="u_child"/></div>
-        <PostForm onSubmit={this.onSubmit} ref="child" />
+        <Posts />
         <AddFriend onSubmitFriend={this.props.onSubmitFriend} />
         <ProfilePhotos photos={this.props.photoList} />
         <AddPhoto AddImage={this.AddImage} ref="p_child" />

@@ -13,17 +13,6 @@ export default function(props) {
           <button>Edit profile</button>
         </form>
       </div>
-      <div className="profile-news">
-        {props.posts.map(post => {
-          return (
-            <div key={post.id} className="data-list-item">
-              <div className="details">
-                {post.title} {post.body}
-              </div>
-            </div>
-          );
-        })}
-      </div>
       <div className = 'profile-list-friends'>
         {props.friends.map(friend => {
           return (
