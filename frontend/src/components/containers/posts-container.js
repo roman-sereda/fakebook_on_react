@@ -11,7 +11,6 @@ import * as userApi from '../../api/user-api';
 const PostsContainer = React.createClass({
 
   componentDidMount: function() {
-    userApi.getCurrentUser();
     postApi.getPosts(this.props.user.id);
   },
 
@@ -40,8 +39,7 @@ const PostsContainer = React.createClass({
 
 const mapStateToProps = function(store) {
   return {
-    postList: store.postState.posts,
-    user: store.userState.current_user
+    postList: store.postState.posts
   };
 };
 

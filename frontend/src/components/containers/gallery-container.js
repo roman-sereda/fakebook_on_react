@@ -11,7 +11,6 @@ import * as userApi from '../../api/user-api';
 const GalleryContainer = React.createClass({
 
   componentDidMount: function() {
-    userApi.getCurrentUser();
     photoApi.getPhotos(this.props.user.id);
   },
 
@@ -38,8 +37,7 @@ const GalleryContainer = React.createClass({
 
 const mapStateToProps = function(store) {
   return {
-    photoList: store.photoState.photos,
-    user: store.userState.current_user
+    photoList: store.photoState.photos
   };
 };
 

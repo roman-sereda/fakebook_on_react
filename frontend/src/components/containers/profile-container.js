@@ -14,10 +14,6 @@ const ProfileContainer = React.createClass({
      };
    },
 
-  componentDidMount: function() {
-    userApi.getCurrentUser();
-  },
-
   UpdateUser: function(event){
     event.preventDefault();
 
@@ -51,7 +47,6 @@ const ProfileContainer = React.createClass({
 
 const mapStateToProps = function(store) {
   return {
-    user: store.userState.current_user
   };
 };
 

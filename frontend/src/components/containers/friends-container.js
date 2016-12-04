@@ -11,7 +11,6 @@ import * as userApi from '../../api/user-api';
 const FriendsContainer = React.createClass({
 
   componentDidMount: function() {
-    userApi.getCurrentUser();
     friendshipApi.getFriendship(this.props.user.id);
   },
 
@@ -36,8 +35,7 @@ const FriendsContainer = React.createClass({
 
 const mapStateToProps = function(store) {
   return {
-    friends: store.friendshipState.friendship,
-    user: store.userState.current_user
+    friends: store.friendshipState.friendship
   };
 };
 

@@ -1,94 +1,25 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import UserProfile from '../views/users/profile';
-import PostForm from '../views/posts/form';
-import AddFriend from '../views/friendship/add_friend';
-import EditForm from '../views/users/form';
-import ProfilePhotos from '../views/photos/photos';
-import AddPhoto from '../views/photos/add_photo';
-import * as userApi from '../../api/user-api';
-import * as postApi from '../../api/post-api';
-import * as photoApi from '../../api/photo-api';
-import * as friendshipApi from '../../api/friendship-api';
+import React          from 'react';
+import store          from '../../store';
+import { connect }    from 'react-redux';
+
+import Posts          from './posts-container'
+import Gallery        from './gallery-container'
+import Friends        from './friends-container'
+import Profile        from './profile-container'
+
+import * as userApi   from '../../api/user-api';
 
 const UserProfileContainer = React.createClass({
-  getInitialState : function() {
-   return {
-     showReply : true
-   };
- },
 
   componentDidMount: function() {
     let userId = this.props.params.userId
-
-    userApi.getProfile(userId);
-    postApi.getPosts(userId);
-    friendshipApi.getFriendship(userId);
-    photoApi.getPhotos(userId);
-
-    console.log(this.props.photoList);
-  },
-
-  onSubmit: function(event){
-    event.preventDefault();
-
-    let post = {};
-    post.body = this.refs.child.getBody();
-    post.title = this.refs.child.getTitle();
-    post.user_id = userId;
-
-    postApi.sendPost(post, userId);
-    postApi.getPosts(userId);
-  },
-
-  onSubmitFriend: function(event){
-    event.preventDefault();
-
-    let user = store.getState().userState.current_user;
-
-    friendshipApi.sendFriendshipRequest(userId,user);
-  },
-
-  UpdateUser: function(event){
-    event.preventDefault();
-
-    let user = {};
-    user.name = this.refs.u_child.getName();
-    user.surname = this.refs.u_child.getSurame();
-    user.email = this.refs.u_child.getEmail();
-    user.password = this.refs.u_child.getPassword();
-    user.password_confirmation = this.refs.u_child.getPasswordConf();
-
-    userApi.editUser(userId, user);
-  },
-
-
-  onSubmitEdit: function(event){
-    event.preventDefault();
-    this.setState({
-      showReply : !this.state.showReply
-    });
-  },
-
-  AddImage: function(event){
-    event.preventDefault();
-
-    let photo = {};
-    photo.user_id = userId;
-    photo.image = this.refs.p_child.getImage();
-
-    photoApi.sendPhoto(userId, photo);
+    userApi.getUser(userId);
   },
 
   render: function() {
     return (
       <div>
-        <UserProfile {...this.props.profile} posts={this.props.postList}  friends={this.props.friends} onSubmitEdit={this.onSubmitEdit} />
-        <div className={this.state.showReply ? 'hidden' : ''}><EditForm UpdateUser = {this.UpdateUser} ref="u_child"/></div>
-        <PostForm onSubmit={this.onSubmit} ref="child" />
-        <AddFriend onSubmitFriend={this.props.onSubmitFriend} />
-        <ProfilePhotos photos={this.props.photoList} />
-        <AddPhoto AddImage={this.AddImage} ref="p_child" />
+        <Profile user={this.props.user} />
       </div>
     );
   }
@@ -97,10 +28,7 @@ const UserProfileContainer = React.createClass({
 
 const mapStateToProps = function(store) {
   return {
-    profile: store.userState.userProfile,
-    postList: store.postState.posts,
-    friends: store.friendshipState.friendship,
-    photoList: store.photoState.photos
+    user: store.userState.user
   };
 };
 

@@ -7,15 +7,21 @@ import Gallery        from './gallery-container'
 import Friends        from './friends-container'
 import Profile        from './profile-container'
 
-const UserProfileContainer = React.createClass({
+import * as userApi   from '../../api/user-api';
+
+const CurrentUserProfileContainer = React.createClass({
+
+  componentDidMount: function() {
+    userApi.getCurrentUser();
+  },
 
   render: function() {
     return (
       <div>
-        <Profile />
-        <Posts   />
-        <Friends />
-        <Gallery />
+        <Profile user={this.props.user} />
+        <Posts   user={this.props.user} />
+        <Friends user={this.props.user} />
+        <Gallery user={this.props.user} />
       </div>
     );
   }
@@ -24,8 +30,8 @@ const UserProfileContainer = React.createClass({
 
 const mapStateToProps = function(store) {
   return {
-    
+    user: store.userState.current_user
   };
 };
 
-export default connect(mapStateToProps)(UserProfileContainer);
+export default connect(mapStateToProps)(CurrentUserProfileContainer);
