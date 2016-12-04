@@ -3,14 +3,12 @@ import store from '../../store';
 import { connect } from 'react-redux';
 import UserProfile from '../views/user-profile';
 import Posts from './posts-container'
-import AddFriend from '../views/friendship/add_friend';
+import Friends from './friends-container'
 import EditForm from '../views/users/edit_form';
 import ProfilePhotos from '../views/photos/profile_photos';
 import AddPhoto from '../views/photos/form';
 import * as userApi from '../../api/user-api';
-import * as postApi from '../../api/post-api';
 import * as photoApi from '../../api/photo-api';
-import * as friendshipApi from '../../api/friendship-api';
 
 const UserProfileContainer = React.createClass({
   getInitialState : function() {
@@ -22,29 +20,8 @@ const UserProfileContainer = React.createClass({
   componentDidMount: function() {
     userApi.getCurrentUser();
     userApi.getProfile(this.props.user.id);
-    postApi.getPosts(this.props.user.id);
     friendshipApi.getFriendship(this.props.user.id);
     photoApi.getPhotos(this.props.user.id);
-  },
-
-  onSubmit: function(event){
-    event.preventDefault();
-
-    let post = {};
-    post.body = this.refs.child.getBody();
-    post.title = this.refs.child.getTitle();
-    post.user_id = this.props.user.id;
-
-    postApi.sendPost(post, this.props.user.id);
-    postApi.getPosts(this.props.user.id);
-  },
-
-  onSubmitFriend: function(event){
-    event.preventDefault();
-
-    let userId = this.props.params.userId
-
-    friendshipApi.sendFriendshipRequest(this.props.user.id, userId);
   },
 
   UpdateUser: function(event){
@@ -81,10 +58,10 @@ const UserProfileContainer = React.createClass({
   render: function() {
     return (
       <div>
-        <UserProfile {...this.props.profile} friends={this.props.friends} onSubmitEdit={this.onSubmitEdit} />
+        <UserProfile {...this.props.profile} onSubmitEdit={this.onSubmitEdit} />
         <div className={this.state.showReply ? 'hidden' : ''}><EditForm UpdateUser = {this.UpdateUser} ref="u_child"/></div>
         <Posts />
-        <AddFriend onSubmitFriend={this.props.onSubmitFriend} />
+        <Friends />
         <ProfilePhotos photos={this.props.photoList} />
         <AddPhoto AddImage={this.AddImage} ref="p_child" />
       </div>
@@ -96,8 +73,6 @@ const UserProfileContainer = React.createClass({
 const mapStateToProps = function(store) {
   return {
     profile: store.userState.userProfile,
-    postList: store.postState.posts,
-    friends: store.friendshipState.friendship,
     photoList: store.photoState.photos,
     user: store.userState.current_user
   };
