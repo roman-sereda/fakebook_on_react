@@ -1,6 +1,6 @@
 import axios from 'axios';
 import store from '../store';
-import { getCurrentUserSuccess, signOutSuccess, getUsersSuccess, createSessionSuccess, createUserSuccess, userProfileSuccess, editUserSuccess } from '../actions/user-actions';
+import { getUserSuccess, getCurrentUserSuccess, signOutSuccess, getUsersSuccess, createSessionSuccess, createUserSuccess, userProfileSuccess, editUserSuccess } from '../actions/user-actions';
 
 export function signOut() {
   return axios.delete('http://localhost:3000/signout')
@@ -14,6 +14,14 @@ export function getCurrentUser() {
   return axios.get('http://localhost:3000/current_user')
     .then(response => {
       store.dispatch(getCurrentUserSuccess(response.data));
+      return response;
+    });
+}
+
+export function getUser(userId) {
+  return axios.get('http://localhost:3000/users/' + userId)
+    .then(response => {
+      store.dispatch(getUserSuccess(response.data));
       return response;
     });
 }
@@ -52,37 +60,4 @@ export function createSession(user2) {
       store.dispatch(createSessionSuccess(response.data));
       return response;
     });
-}
-
-export function getProfile(userId) {
-
-  let profile = {};
-
-  return axios.get('http://localhost:3000/users/' + userId)
-    .then(response => {
-
-      let user = response.data;
-      profile.name = user.name;
-      profile.surname = user.surname;
-      profile.email = user.email;
-      profile.avatar = user.avatar.url;
-
-      return Promise.all([
-        axios.get('https://api.github.com/users/' + user.github),
-        axios.get('https://api.github.com/users/' + user.github + '/repos')
-      ]).then(results => {
-
-        let githubProfile = results[0].data;
-        let githubRepos = results[1].data;
-
-        profile.imageUrl = githubProfile.avatar_url;
-        profile.repos = githubRepos;
-
-        store.dispatch(userProfileSuccess(profile));
-
-        return;
-
-      });
-    });
-
 }

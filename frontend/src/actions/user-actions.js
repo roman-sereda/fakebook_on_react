@@ -21,10 +21,10 @@ export function signOutSuccess(user) {
   };
 }
 
-export function userProfileSuccess(userProfile) {
+export function getUserSuccess(user) {
   return {
-    type: types.USER_PROFILE_SUCCESS,
-    userProfile
+    type: types.GET_USER_SUCCESS,
+    user
   };
 }
 

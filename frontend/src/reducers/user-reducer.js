@@ -3,7 +3,6 @@ import _ from 'lodash';
 
 const initialState = {
   user: [],
-  userProfile: [],
   users: [],
   current_user: []
 };
@@ -14,6 +13,9 @@ const userReducer = function(state = initialState, action) {
 
     case types.GET_USERS_SUCCESS:
       return Object.assign({}, state, { users: action.users });
+
+    case types.GET_USER_SUCCESS:
+      return Object.assign({}, state, { user: action.user });
 
     case types.GET_CURRENT_USER_SUCCESS:
       return Object.assign({}, state, { current_user: action.current_user });
