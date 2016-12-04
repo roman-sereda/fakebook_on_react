@@ -11,7 +11,8 @@ import * as userApi from '../../api/user-api';
 const PostsContainer = React.createClass({
 
   componentDidMount: function() {
-    postApi.getPosts(this.props.user.id);
+    console.log('users id: ' + this.props.user )
+    postApi.getPosts(this.props.user);
   },
 
   onSubmit: function(event){
@@ -20,10 +21,10 @@ const PostsContainer = React.createClass({
     let post = {};
     post.body = this.refs.child.getBody();
     post.title = this.refs.child.getTitle();
-    post.user_id = this.props.user.id;
+    post.user_id = this.props.user;
 
-    postApi.sendPost(post, this.props.user.id);
-    postApi.getPosts(this.props.user.id);
+    postApi.sendPost(post, this.props.user);
+    postApi.getPosts(this.props.user);
   },
 
   render: function() {

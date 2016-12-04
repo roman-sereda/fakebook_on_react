@@ -11,17 +11,17 @@ import * as userApi from '../../api/user-api';
 const GalleryContainer = React.createClass({
 
   componentDidMount: function() {
-    photoApi.getPhotos(this.props.user.id);
+    photoApi.getPhotos(this.props.user);
   },
 
   AddImage: function(event){
     event.preventDefault();
 
     let photo = {};
-    photo.user_id = this.props.user.id;
+    photo.user_id = this.props.user;
     photo.image = this.refs.p_child.getImage();
 
-    photoApi.sendPhoto(this.props.user.id, photo);
+    photoApi.sendPhoto(this.props.user, photo);
   },
 
   render: function() {

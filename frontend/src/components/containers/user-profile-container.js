@@ -12,14 +12,19 @@ import * as userApi   from '../../api/user-api';
 const UserProfileContainer = React.createClass({
 
   componentDidMount: function() {
+
     let userId = this.props.params.userId
+    console.log('user id: ' + userId)
     userApi.getUser(userId);
   },
 
   render: function() {
     return (
       <div>
-        <Profile user={this.props.user} />
+        <Profile user={this.props.userPage} />
+        <Posts   user={this.props.params.userId} />
+        <Friends user={this.props.params.userId} />
+        <Gallery user={this.props.params.userId} />
       </div>
     );
   }
@@ -28,7 +33,7 @@ const UserProfileContainer = React.createClass({
 
 const mapStateToProps = function(store) {
   return {
-    user: store.userState.user
+    userPage: store.userState.user
   };
 };
 

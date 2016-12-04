@@ -11,15 +11,14 @@ import * as userApi from '../../api/user-api';
 const FriendsContainer = React.createClass({
 
   componentDidMount: function() {
-    friendshipApi.getFriendship(this.props.user.id);
+    friendshipApi.getFriendship(this.props.user);
+    userApi.getCurrentUser();
   },
 
   onSubmitFriend: function(event){
     event.preventDefault();
 
-    let userId = this.props.params.userId
-
-    friendshipApi.sendFriendshipRequest(this.props.user.id, userId);
+    friendshipApi.sendFriendshipRequest(this.props.current_user.id, this.props.user);
   },
 
   render: function() {
@@ -35,7 +34,8 @@ const FriendsContainer = React.createClass({
 
 const mapStateToProps = function(store) {
   return {
-    friends: store.friendshipState.friendship
+    friends: store.friendshipState.friendship,
+    current_user: store.userState.current_user
   };
 };
 

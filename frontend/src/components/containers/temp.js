@@ -12,7 +12,6 @@ const Temp = React.createClass({
   },
 
   render: function() {
-    userApi.getCurrentUser();
     console.log(this.props.user.id)
     return (
       <div className="menu">

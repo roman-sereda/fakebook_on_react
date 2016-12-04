@@ -18,10 +18,10 @@ const CurrentUserProfileContainer = React.createClass({
   render: function() {
     return (
       <div>
-        <Profile user={this.props.user} />
-        <Posts   user={this.props.user} />
-        <Friends user={this.props.user} />
-        <Gallery user={this.props.user} />
+        <Profile user={this.props.current_user} />
+        <Posts   user={this.props.current_user.id} />
+        <Friends user={this.props.current_user.id} />
+        <Gallery user={this.props.current_user.id} />
       </div>
     );
   }
@@ -30,7 +30,7 @@ const CurrentUserProfileContainer = React.createClass({
 
 const mapStateToProps = function(store) {
   return {
-    user: store.userState.current_user
+    current_user: store.userState.current_user
   };
 };
 
