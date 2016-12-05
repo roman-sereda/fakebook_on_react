@@ -4,6 +4,7 @@ import _ from 'lodash';
 const initialState = {
   user: [],
   users: [],
+  logged: [],
   current_user: []
 };
 
@@ -17,11 +18,14 @@ const userReducer = function(state = initialState, action) {
     case types.GET_USER_SUCCESS:
       return Object.assign({}, state, { user: action.user });
 
+    case types.CHECK_IF_LOGGED_SUCCESS:
+      return Object.assign({}, state, { logged: action.logged });
+
     case types.GET_CURRENT_USER_SUCCESS:
       return Object.assign({}, state, { current_user: action.current_user });
 
     case types.SIGN_OUT_SUCCESS:
-      return Object.assign({}, state, { current_user: [] });
+      return Object.assign({}, state, { current_user: [], logged: false});
 
     case types.USER_PROFILE_SUCCESS:
       return Object.assign({}, state, { userProfile: action.userProfile });
@@ -33,7 +37,7 @@ const userReducer = function(state = initialState, action) {
       return Object.assign({}, state, { user: action.user });
 
     case types.CREATE_SESSION_SUCCESS:
-      return Object.assign({}, state, { current_user: action.user });
+      return Object.assign({}, state, { current_user: action.current_user });
   }
 
   return state;
