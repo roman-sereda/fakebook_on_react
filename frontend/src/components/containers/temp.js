@@ -8,14 +8,13 @@ import store from '../../store';
 const Temp = React.createClass({
 
   componentDidMount: function() {
-    userApi.getCurrentUser();
+    userApi.checkIfLogged();
   },
 
   render: function() {
-    console.log(this.props.user.id)
     return (
       <div className="menu">
-        {this.props.user.id == undefined ?  < SignIn /> : < Profile2 /> }
+        {this.props.logged ?  < Profile2 />  : < SignIn /> }
       </div>
     );
   }
@@ -24,7 +23,7 @@ const Temp = React.createClass({
 
 const mapStateToProps = function(store) {
   return {
-    user: store.userState.current_user
+    logged: store.userState.logged
   };
 };
 

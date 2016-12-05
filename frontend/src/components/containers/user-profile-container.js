@@ -1,5 +1,4 @@
 import React          from 'react';
-import store          from '../../store';
 import { connect }    from 'react-redux';
 
 import Posts          from './posts-container'
@@ -12,28 +11,25 @@ import * as userApi   from '../../api/user-api';
 const UserProfileContainer = React.createClass({
 
   componentDidMount: function() {
-
-    let userId = this.props.params.userId
-    console.log('user id: ' + userId)
-    userApi.getUser(userId);
+    userApi.getUser(this.props.params.userId);
   },
 
   render: function() {
+    console.log(this.props.params.userId)
     return (
       <div>
-        <Profile user={this.props.userPage} />
+        <Profile user={this.props.user} />
         <Posts   user={this.props.params.userId} />
         <Friends user={this.props.params.userId} />
         <Gallery user={this.props.params.userId} />
       </div>
     );
   }
-
 });
 
 const mapStateToProps = function(store) {
   return {
-    userPage: store.userState.user
+    user: store.userState.user
   };
 };
 

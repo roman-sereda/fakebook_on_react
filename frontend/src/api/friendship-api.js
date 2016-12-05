@@ -3,7 +3,6 @@ import store from '../store';
 import { getFriendshipSuccess, sendFriendshipRequestSuccess } from '../actions/friendship-actions';
 
 export function getFriendship(userId) {
-  console.log(userId)
   return axios.get('http://localhost:3000/friendships/' + userId)
     .then(response => {
       store.dispatch(getFriendshipSuccess(response.data));
@@ -12,7 +11,6 @@ export function getFriendship(userId) {
 }
 
 export function sendFriendshipRequest(userId, friendId) {
-  console.log(userId, friendId)
   return axios.post('http://localhost:3000/friendships', {user_id: userId, friend_id: friendId})
     .then(response => {
       store.dispatch(sendFriendshipRequestSuccess(response.data));

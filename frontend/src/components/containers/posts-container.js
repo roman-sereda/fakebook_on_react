@@ -11,7 +11,6 @@ import * as userApi from '../../api/user-api';
 const PostsContainer = React.createClass({
 
   componentDidMount: function() {
-    console.log('users id: ' + this.props.user )
     postApi.getPosts(this.props.user);
   },
 
