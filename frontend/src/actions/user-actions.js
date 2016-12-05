@@ -7,9 +7,16 @@ export function getUsersSuccess(users) {
   };
 }
 
+export function checkIfLoggedSuccess(logged) {
+  return {
+    type: types.CHECK_IF_LOGGED_SUCCESS,
+    logged
+  };
+}
+
 export function getCurrentUserSuccess(current_user) {
   return {
-    type: types.CURRENT_USER_SUCCESS,
+    type: types.GET_CURRENT_USER_SUCCESS,
     current_user
   };
 }
@@ -42,9 +49,9 @@ export function createUserSuccess(user) {
   };
 }
 
-export function createSessionSuccess(user) {
+export function createSessionSuccess(current_user) {
   return {
     type: types.CREATE_SESSION_SUCCESS,
-    user
+    current_user
   };
 }
