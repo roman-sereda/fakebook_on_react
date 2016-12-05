@@ -12,18 +12,31 @@ class UsersController < ApplicationController
   end
 
   def get_current_user
-    p "current_user: #{current_user}"
-    render json: current_user
+    user3 =  {name: current_user.name,
+              id: current_user.id,
+              surname: current_user.surname,
+              email: current_user.email,
+              avatar: current_user.avatar.url}
+    render json: user3
   end
 
   def show
-    @user = User.find(params[:id])
-    render json: @user
+    user = User.find(params[:id])
+    user2 =  {name: user.name,
+              id: user.id,
+              surname: user.surname,
+              email: user.email,
+              avatar: user.avatar.url}
+    render json: user2
   end
 
-  def iflogged
-    p "current_user: #{defined?(current_user)}"
-    render json: (defined?(current_user) == nil ? false : true).to_json
+  def ifLogged?
+    p "#{current_user.name}"
+    if(defined?(current_user) == nil)
+      render json: false
+    else
+      render json: true
+    end
   end
 
   def create
