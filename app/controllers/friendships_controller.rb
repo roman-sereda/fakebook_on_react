@@ -1,5 +1,4 @@
 class FriendshipsController < ApplicationController
-  before_action :set_friendship, only: [:show, :edit, :update, :destroy]
   skip_before_action :verify_authenticity_token
 
   def index
@@ -11,7 +10,9 @@ class FriendshipsController < ApplicationController
   end
 
   def show
-    @friendship = User.find(params[:id]).friendships
+    user = User.find(params[:id])
+    p "FRINEDSHIP: #{user.friendships}"
+    @friendship = user.friendships
     render json: @friendship.to_json
   end
 
@@ -31,9 +32,4 @@ class FriendshipsController < ApplicationController
     flash[:notice] = "Removed friendship."
     redirect_to current_user
   end
-
-  private
-    def set_friendship
-      @friendship = Friendship.find(params[:id])
-    end
 end
