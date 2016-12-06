@@ -11,13 +11,10 @@ import * as userApi   from '../../api/user-api';
 
 const CurrentUserProfileContainer = React.createClass({
 
-  componentDidMount: function() {
-    userApi.getCurrentUser();
-  },
-
   componentWillReceiveProps: function(NextProps) {
-    if (NextProps.user.id !== this.props.user.id)
+    if (NextProps.user.id != this.props.user.id){
       userApi.getCurrentUser();
+    }
   },
 
   render: function() {

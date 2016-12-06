@@ -15,8 +15,9 @@ const UserProfileContainer = React.createClass({
   },
 
   componentWillReceiveProps: function(NextProps) {
-    if (NextProps.params.userId !== this.props.params.userId)
-      userApi.getUser(NextProps.params.userId);
+      if (NextProps.params.userId != this.props.params.userId){
+        userApi.getUser(NextProps.params.userId);
+      }
     },
 
   render: function() {
