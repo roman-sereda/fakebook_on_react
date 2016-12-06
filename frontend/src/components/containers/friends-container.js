@@ -15,7 +15,7 @@ const FriendsContainer = React.createClass({
   },
 
   componentWillReceiveProps: function(NextProps) {
-    if (NextProps.current_user.id !== this.props.current_user.id){
+    if (NextProps.user != this.props.user){
       friendshipApi.getFriendship(NextProps.user );
     }
   },
