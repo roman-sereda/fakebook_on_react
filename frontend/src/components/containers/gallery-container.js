@@ -10,8 +10,8 @@ import * as userApi from '../../api/user-api';
 
 const GalleryContainer = React.createClass({
 
-  componentDidMount: function() {
-    photoApi.getPhotos(this.props.user);
+  componentWillReceiveProps: function(NextProps) {
+    photoApi.getPhotos(NextProps.user );
   },
 
   AddImage: function(event){

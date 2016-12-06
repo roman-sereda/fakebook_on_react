@@ -10,8 +10,8 @@ import * as userApi from '../../api/user-api';
 
 const PostsContainer = React.createClass({
 
-  componentDidMount: function() {
-    postApi.getPosts(this.props.user);
+  componentWillReceiveProps: function(NextProps) {
+    postApi.getPosts(NextProps.user );
   },
 
   onSubmit: function(event){

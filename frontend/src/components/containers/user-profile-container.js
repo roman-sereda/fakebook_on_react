@@ -14,14 +14,18 @@ const UserProfileContainer = React.createClass({
     userApi.getUser(this.props.params.userId);
   },
 
+  componentWillReceiveProps: function(NextProps) {
+    if (NextProps.params.userId !== this.props.params.userId)
+      userApi.getUser(NextProps.params.userId);
+    },
+
   render: function() {
-    console.log(this.props.params.userId)
     return (
       <div>
         <Profile user={this.props.user} />
-        <Posts   user={this.props.params.userId} />
-        <Friends user={this.props.params.userId} />
-        <Gallery user={this.props.params.userId} />
+        <Posts   user={this.props.user.id} />
+        <Friends user={this.props.user.id} />
+        <Gallery user={this.props.user.id} />
       </div>
     );
   }

@@ -11,10 +11,15 @@ const Temp = React.createClass({
     userApi.checkIfLogged();
   },
 
+  componentWillReceiveProps: function(NextProps) {
+    if (NextProps.logged !== this.props.logged)
+      userApi.checkIfLogged();
+    },
+
   render: function() {
     return (
       <div className="menu">
-        {this.props.logged ?  < Profile2 />  : < SignIn /> }
+        {(this.props.logged) ?  < Profile2 />  : < SignIn /> }
       </div>
     );
   }
