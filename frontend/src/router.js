@@ -10,6 +10,7 @@ import store from './store';
 import SignIn from './components/containers/sign-in-container';
 import SignUp from './components/containers/sign-up-container';
 import Temp from './components/containers/temp';
+import FriendsList from './components/containers/friends-list-container';
 
 export default (
   <Router history={hashHistory}>
@@ -18,7 +19,10 @@ export default (
 
         <Route path="users">
           <IndexRoute component={UsersContainer} />
-          <Route path=":userId" component={UserProfileContainer} />
+          <Route path=":userId" >
+            <IndexRoute component={UserProfileContainer} />
+            <Route path="friends" component={FriendsList} />
+          </Route>
         </Route>
 
     </Route>
