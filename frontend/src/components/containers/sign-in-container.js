@@ -27,7 +27,6 @@ const SignIn = React.createClass({
 
 const mapStateToProps = function(store) {
   return {
-    profile: store.userState.userProfile
   };
 };
 

@@ -37,7 +37,7 @@ const userReducer = function(state = initialState, action) {
       return Object.assign({}, state, { user: action.user });
 
     case types.CREATE_SESSION_SUCCESS:
-      return Object.assign({}, state, { current_user: action.current_user });
+      return Object.assign({}, state, { logged: true });
   }
 
   return state;
