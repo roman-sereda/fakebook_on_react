@@ -7,8 +7,9 @@ class PostsController < ApplicationController
     posts = @user.posts
     @posts = posts.map {|post| {title: post.title,
                                 body: post.body,
-                               user_login: "#{@user.name} #{@user.surname}",
-                               user_avatar: @user.avatar}}
+                                id: post.id,
+                                user_login: "#{@user.name} #{@user.surname}",
+                                user_avatar: @user.avatar}}
     render json: @posts.to_json
   end
 
