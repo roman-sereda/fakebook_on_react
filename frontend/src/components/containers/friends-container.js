@@ -16,14 +16,14 @@ const FriendsContainer = React.createClass({
 
   onSubmitFriend: function(event){
     event.preventDefault();
-
+    console.log(this.props.current_user.id + " | " + this.props.user)
     friendshipApi.sendFriendshipRequest(this.props.current_user.id, this.props.user);
   },
 
   render: function() {
     return (
       <div>
-        <AddFriend onSubmitFriend={this.props.onSubmitFriend} />
+        <AddFriend onSubmitFriend={this.onSubmitFriend} />
         <Friends friends={this.props.friends} />
       </div>
     );
@@ -33,7 +33,8 @@ const FriendsContainer = React.createClass({
 
 const mapStateToProps = function(store) {
   return {
-    friends: store.friendshipState.friendship
+    friends: store.friendshipState.friendship,
+    current_user: store.userState.current_user
   };
 };
 
