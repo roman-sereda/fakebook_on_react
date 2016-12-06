@@ -12,12 +12,16 @@ class UsersController < ApplicationController
   end
 
   def get_current_user
-    user3 =  {name: current_user.name,
-              id: current_user.id,
-              surname: current_user.surname,
-              email: current_user.email,
-              avatar: current_user.avatar.url}
-    render json: user3
+    if(signed_in?)
+      user3 =  {name: current_user.name,
+                id: current_user.id,
+                surname: current_user.surname,
+                email: current_user.email,
+                avatar: current_user.avatar.url}
+      render json: user3
+    else
+      render json: []
+    end
   end
 
   def show
