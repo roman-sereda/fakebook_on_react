@@ -7,7 +7,7 @@ import store from '../../store';
 
 const Temp = React.createClass({
 
-  componentDidMount: function() {
+  componentWillMount: function() {
     userApi.checkIfLogged();
   },
 
@@ -17,6 +17,7 @@ const Temp = React.createClass({
     },
 
   render: function() {
+    console.log(this.props.logged)
     return (
       <div className="menu">
         {(this.props.logged) ?  < Profile2 />  : < SignIn /> }
