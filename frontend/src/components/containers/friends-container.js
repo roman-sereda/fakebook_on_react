@@ -10,21 +10,28 @@ import * as userApi from '../../api/user-api';
 
 const FriendsContainer = React.createClass({
 
+  componentWillMount: function(){
+    userApi.getCurrentUser();
+  },
+
   componentWillReceiveProps: function(NextProps) {
-    friendshipApi.getFriendship(NextProps.user );
+    if (NextProps.current_user.id !== this.props.current_user.id){
+      friendshipApi.getFriendship(NextProps.user );
+    }
   },
 
   onSubmitFriend: function(event){
     event.preventDefault();
     console.log(this.props.current_user.id + " | " + this.props.user)
     friendshipApi.sendFriendshipRequest(this.props.current_user.id, this.props.user);
+    friendshipApi.getFriendship(this.props.user);
   },
 
   render: function() {
     return (
       <div>
         <AddFriend onSubmitFriend={this.onSubmitFriend} />
-        <Friends friends={this.props.friends} />
+        <Friends friends={this.props.friends} link={"/users/" + this.props.user + "/friends"}/>
       </div>
     );
   }
