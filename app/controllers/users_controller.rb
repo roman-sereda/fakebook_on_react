@@ -31,8 +31,8 @@ class UsersController < ApplicationController
   end
 
   def ifLogged?
-    p "#{current_user.name}"
-    if(defined?(current_user) == nil)
+    p "#{defined?(current_user.name)}"
+    if(defined?(current_user.name) == nil)
       render json: false
     else
       render json: true
