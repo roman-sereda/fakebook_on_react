@@ -15,8 +15,8 @@ class PhotosController < ApplicationController
   end
 
   def create
-    @photo = User.find(params[:user_id]).photos.create(photo_params)
-
+    @photo = User.find(params[:user_id]).photos.create(user_id: params[:user_id], image: params[:image] )
+    p "#{params}"
     if @photo.save
       p "PHOTO IS SAVED"
       render json: @photo.to_json
@@ -26,8 +26,5 @@ class PhotosController < ApplicationController
     end
   end
 
-  def photo_params
-    params.require(:photo).permit(:user_id, :image)
-  end
 
 end
