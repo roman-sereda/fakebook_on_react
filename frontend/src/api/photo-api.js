@@ -18,9 +18,9 @@ export function getAllPhotos(userId) {
     });
 }
 
-export function sendPhoto(userId, photo2) {
-  console.log(photo2)
-  return axios.post('http://localhost:3000/users/' + userId + '/photos', {photo: photo2})
+export function sendPhoto(userId, photo) {
+  console.log(photo)
+  return axios.post('http://localhost:3000/users/' + userId + '/photos', photo)
     .then(response => {
       store.dispatch(sendPhotoSuccess(response.data));
       return response;

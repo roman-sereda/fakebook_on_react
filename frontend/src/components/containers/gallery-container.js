@@ -17,11 +17,13 @@ const GalleryContainer = React.createClass({
   AddImage: function(event){
     event.preventDefault();
 
-    let photo = {};
-    photo.user_id = this.props.user;
-    photo.image = this.refs.p_child.getImage();
+    var data = new FormData();
+    data.append('user_id', this.props.user);
+    data.append('image', document.getElementById('file').files[0]);
 
-    photoApi.sendPhoto(this.props.user, photo);
+    console.log(data)
+
+    photoApi.sendPhoto(this.props.user, data);
   },
 
   render: function() {
