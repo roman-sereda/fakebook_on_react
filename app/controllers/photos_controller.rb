@@ -2,10 +2,16 @@ class PhotosController < ApplicationController
 
   skip_before_action :verify_authenticity_token
 
-  def index
+  def get_short_photos_list
     @user = User.find(params[:user_id])
     @photos = @user.photos
-    render json: @photos.to_json
+    render json: @photos.limit(8)
+  end
+
+  def get_full_photos_list
+    @user = User.find(params[:user_id])
+    @photos = @user.photos
+    render json: @photos
   end
 
   def create
