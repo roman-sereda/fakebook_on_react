@@ -1,9 +1,10 @@
 import React from 'react';
 import store from '../../store';
 import { connect } from 'react-redux';
-
+import InfiniteScroll from 'redux-infinite-scroll';
 import PostForm from '../views/posts/form'
 import UsersPosts from '../views/posts/posts'
+import EndlessScroll from './endless-scroll-container'
 
 import * as postApi from '../../api/post-api';
 import * as userApi from '../../api/user-api';
@@ -30,11 +31,10 @@ const PostsContainer = React.createClass({
     return (
       <div>
         <PostForm onSubmit={this.onSubmit} ref="child" />
-        <UsersPosts posts={this.props.postList} />
+        <EndlessScroll posts={this.props.postList} user={this.props.user}/>
       </div>
-    );
+    )
   }
-
 });
 
 const mapStateToProps = function(store) {
