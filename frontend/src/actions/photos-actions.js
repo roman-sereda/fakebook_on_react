@@ -7,6 +7,13 @@ export function getPhotosSuccess(photos) {
   };
 }
 
+export function getAllPhotosSuccess(photos) {
+  return {
+    type: types.GET_ALL_PHOTOS_SUCCESS,
+    photos
+  };
+}
+
 export function sendPhotoSuccess(photo) {
   return {
     type: types.SEND_PHOTO_SUCCESS,
