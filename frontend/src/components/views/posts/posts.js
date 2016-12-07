@@ -1,8 +1,10 @@
 import React from 'react';
+import InfiniteScroll from 'redux-infinite-scroll';
 
 export default function(props) {
   return (
     <div className="profile-news">
+    <InfiniteScroll loadingMore={props.loadingMore} containerHeight="300px" loadMore={this.props._loadMore} >
       {props.posts.map(post => {
         return (
           <div key={post.id + 'post'} className="data-list-item">
@@ -13,6 +15,7 @@ export default function(props) {
           </div>
         );
       })}
+    </InfiniteScroll>
     </div>
   );
 }
