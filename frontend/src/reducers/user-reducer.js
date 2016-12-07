@@ -25,7 +25,7 @@ const userReducer = function(state = initialState, action) {
       return Object.assign({}, state, { current_user: action.current_user });
 
     case types.SIGN_OUT_SUCCESS:
-      return Object.assign({}, state, { current_user: [], logged: false});
+      return Object.assign({}, state, { logged: false });
 
     case types.USER_PROFILE_SUCCESS:
       return Object.assign({}, state, { userProfile: action.userProfile });

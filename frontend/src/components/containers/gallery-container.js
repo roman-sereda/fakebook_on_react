@@ -27,7 +27,7 @@ const GalleryContainer = React.createClass({
   render: function() {
     return (
       <div>
-        <Photos photos={this.props.photoList} />
+        <Photos photos={this.props.photoList} link={"/users/" + this.props.user + "/photos"} />
         <AddPhoto AddImage={this.AddImage} ref="p_child" />
       </div>
     );

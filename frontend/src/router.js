@@ -11,6 +11,7 @@ import SignIn from './components/containers/sign-in-container';
 import SignUp from './components/containers/sign-up-container';
 import Temp from './components/containers/temp';
 import FriendsList from './components/containers/friends-list-container';
+import Gallery from './components/containers/gallery-list-container'
 
 export default (
   <Router history={hashHistory}>
@@ -22,6 +23,7 @@ export default (
           <Route path=":userId" >
             <IndexRoute component={UserProfileContainer} />
             <Route path="friends" component={FriendsList} />
+            <Route path="photos" component={Gallery} />
           </Route>
         </Route>
 

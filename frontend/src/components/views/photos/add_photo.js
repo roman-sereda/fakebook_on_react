@@ -11,7 +11,7 @@ export default React.createClass({
     return (
       <div className="user-profile">
         <form onSubmit={this.props.AddImage}>
-          <input type="file" name="pic" ref={(ref) => this.fileUpload = ref} />
+          <input type="file" name="image" />
           <button>Add image</button>
         </form>
       </div>
