@@ -6,11 +6,9 @@ export default function(props) {
       <h2>Gallery</h2>
       {props.gallery.map(photo => {
         return (
-          <div key={'photo' + photo.id} className="data-list-item">
-            <div className="details">
-              <img alt="Icon" src={photo.image.url} />
-            </div>
-          </div>
+          <span key={'photo' + photo.id} className="data-list-item">
+            <img alt="Icon" className="gallery_photos" src={photo.image.url} />
+          </span>
         );
       })}
     </div>
