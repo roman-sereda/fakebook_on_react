@@ -5,12 +5,15 @@ Rails.application.routes.draw do
   get 'islogged' => 'users#iflogged'
   match '/signout', to: 'sessions#destroy',     via: 'delete'
   match '/current_user', to: 'users#get_current_user', via: 'get'
-  match '/iflogged', to: 'users#ifLogged?', via: 'get' 
+  match '/iflogged', to: 'users#ifLogged?', via: 'get'
+
 
   resources :sessions, only: [:create, :destroy]
   resources :friendships
 
   resources :users do
+    match '/get_short_photos', to: 'photos#get_short_photos_list', via: 'get'
+    match '/get_full_photos', to: 'photos#get_full_photos_list', via: 'get'
     resources :posts
     resources :photos
   end
