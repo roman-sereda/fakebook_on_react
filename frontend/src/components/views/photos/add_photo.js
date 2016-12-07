@@ -3,15 +3,15 @@ import React from 'react';
 export default React.createClass({
 
   getImage: function() {
-    console.log(this.fileUpload.files[0]);
-    return this.fileUpload.files[0];
+    console.log(this.refs.file);
+    return this.refs.file;
   },
 
   render: function() {
     return (
-      <div className="user-profile">
+      <div className="form">
         <form onSubmit={this.props.AddImage}>
-          <input type="file" name="image" />
+          <input type="file" ref="file" id="file"/>
           <button>Add image</button>
         </form>
       </div>
