@@ -3,9 +3,11 @@ class PostsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
+    p params[:count]
     @user = User.find(params[:user_id])
     posts = @user.posts
-    @posts = posts.map {|post| {title: post.title,
+    @posts = posts.last(10+params[:count]).map{|post|
+                               {title: post.title,
                                 body: post.body,
                                 id: post.id,
                                 user_login: "#{@user.name} #{@user.surname}",
