@@ -11,13 +11,7 @@ const Temp = React.createClass({
     userApi.checkIfLogged();
   },
 
-  componentWillReceiveProps: function(NextProps) {
-    if (NextProps.logged !== this.props.logged)
-      userApi.checkIfLogged();
-    },
-
   render: function() {
-    console.log(this.props.logged)
     return (
       <div className="menu">
         {(this.props.logged) ?  < Profile2 />  : < SignIn /> }
