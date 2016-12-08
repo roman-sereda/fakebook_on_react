@@ -7,7 +7,7 @@ export default function(props) {
         <img alt="Icon" src={props.profile.avatar} />
         <h1>{props.profile.name} {props.profile.name} {props.profile.id}</h1>
         <h1>{props.profile.email}</h1>
-        <form onSubmit={props.onSubmitEdit}>
+        <form onSubmit={props.ShowEditUserForm}>
           <button>Edit profile</button>
         </form>
       </div>

@@ -17,18 +17,15 @@ const ProfileContainer = React.createClass({
   UpdateUser: function(event){
     event.preventDefault();
 
-    let user = {};
-    user.name = this.refs.user_child.getName();
-    user.surname = this.refs.user_child.getSurame();
-    user.email = this.refs.user_child.getEmail();
-    user.password = this.refs.user_child.getPassword();
-    user.password_confirmation = this.refs.user_child.getPasswordConf();
+    var user = new FormData(document.getElementById('edit_user'));
+    user.append('avatar', document.getElementById('file').files[0])
 
     userApi.editUser(this.props.user.id, user);
   },
 
-  EdirUserForm: function(event){
+  ShowEditUserForm: function(event){
     event.preventDefault();
+    console.log(this.state.showReply)
     this.setState({
       showReply : !this.state.showReply
     });
@@ -37,8 +34,8 @@ const ProfileContainer = React.createClass({
   render: function() {
     return (
       <div>
-        <UserProfile profile={this.props.user} EdirUserForm={this.EdirUserForm} />
-        <div className={this.state.showReply ? 'hidden' : ''}><EditForm UpdateUser = {this.UpdateUser} ref="user_child"/></div>
+        <UserProfile profile={this.props.user} ShowEditUserForm={this.ShowEditUserForm} />
+        <div className={this.state.showReply ? 'hidden' : ''}><EditForm UpdateUser = {this.UpdateUser} /></div>
       </div>
     );
   }
