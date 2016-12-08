@@ -26,7 +26,6 @@ const EndlessScroll = React.createClass({
 
   _loadMore: function() {
 
-    if(this.props.postList.length < this.state.postsCount && (this.props.postList != undefined)){ this.setState({hasMoreItems: false}) }
     this.setState({loadingMore: true});
     setTimeout(() => {
       this.setState({postsCount: this.state.postsCount + 20, loadingMore: false})
@@ -35,7 +34,6 @@ const EndlessScroll = React.createClass({
 
   _renderMessages: function() {
     console.log(this.props.photo)
-    if (this.props.postList == undefined) { return ""; }
     return this.props.postList.slice(0, this.state.postsCount).map((post) => {
       if(post.photo == undefined){
       return(
@@ -62,7 +60,7 @@ const EndlessScroll = React.createClass({
 
   render: function(){
     return(
-      <InfiniteScroll loadingMore={this.state.loadingMore}hasMore={this.state.hasMoreItems} threshold={10} elementIsScrollable={false} loadMore={this._loadMore}>
+      <InfiniteScroll loadingMore={this.state.loadingMore}  threshold={10} elementIsScrollable={false} loadMore={this._loadMore}>
         {this._renderMessages()}
       </InfiniteScroll>
     )
