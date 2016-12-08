@@ -7,10 +7,8 @@ export default React.createClass({
     return (
       <div className="app">
             <ul>
-              <li className="right"><Link to="/users" className="btn btn-default">All users</Link></li>
-              <li className="right"><Link to="/" activeClassName="active">Profile</Link></li>
-              <li className="right"><Link to="/gallery" activeClassName="active">All users</Link></li>
-              <li className="right"><a href='#' onClick={this.props.SignOut} >Log Out</a></li>
+              <li className="right"><Link to="/auth/signin" className="btn btn-default">Sign In</Link></li>
+              <li className="right"><Link to="/auth/signup" activeClassName="active">Sign Up</Link></li>
             </ul>
       </div>
       );
