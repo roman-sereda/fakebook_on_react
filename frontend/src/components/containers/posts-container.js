@@ -14,12 +14,13 @@ const PostsContainer = React.createClass({
   onSubmit: function(event){
     event.preventDefault();
 
-    let post = {};
-    post.body = this.refs.child.getBody();
-    post.title = this.refs.child.getTitle();
-    post.user_id = this.props.user;
+    var data = new FormData();
+    data.append('image', document.getElementById('file').files[0]);
+    data.append('body', this.refs.child.getBody())
+    data.append('title', this.refs.child.getTitle())
+    data.append('user_id', this.props.user)
 
-    postApi.sendPost(post, this.props.user);
+    postApi.sendPost(data, this.props.user);
     postApi.getPosts( this.props.user );
   },
 
