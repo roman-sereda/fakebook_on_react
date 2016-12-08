@@ -15,7 +15,7 @@ const PostsContainer = React.createClass({
     event.preventDefault();
 
     var data = new FormData();
-    data.append('image', document.getElementById('file').files[0]);
+    data.append('image', document.getElementById('file').files[0])
     data.append('body', this.refs.child.getBody())
     data.append('title', this.refs.child.getTitle())
     data.append('user_id', this.props.user)
