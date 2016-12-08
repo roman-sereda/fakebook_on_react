@@ -2,7 +2,6 @@ import React from 'react';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 
 import MainLayout from './components/containers/main-layout-container';
-import LayoutAuth from './components/layouts/auth'
 import UsersContainer from './components/containers/user-list-container';
 import CurrentUserProfileContainer from './components/containers/current-user-profile-container';
 import UserProfileContainer from './components/containers/user-profile-container';
@@ -27,9 +26,8 @@ export default (
           </Route>
         </Route>
 
-    </Route>
-    <Route path="auth" component={LayoutAuth}>
-      <IndexRoute component={SignIn} />
+    
+      <Route path="/auth/signin" component={SignIn} />
       <Route path="/auth/signup" component={SignUp} />
     </Route>
 
