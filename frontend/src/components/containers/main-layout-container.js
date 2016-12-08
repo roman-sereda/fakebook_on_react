@@ -1,23 +1,30 @@
 import React from 'react';
-import { connect, hashHistory } from 'react-redux';
+import { connect } from 'react-redux';
+import { hashHistory } from 'react-router'
 import store from '../../store';
 
-import MainLayout from '../layouts/main-layout';
+import NotLoggedNavbar from '../layouts/main-layout';
+import LoggedNavbar from '../layouts/logged-navbar';
 import * as userApi from '../../api/user-api';
 
 
 const MainLayoutContainer = React.createClass({
 
+  componentWillMount: function() {
+    userApi.checkIfLogged();
+  },
+
   SignOut: function(event){
       event.preventDefault();
       console.log("OUT")
       userApi.signOut();
+      hashHistory.push('/')
   },
 
   render: function() {
     return (
       <div>
-        <MainLayout SignOut={this.SignOut}/>
+        {(this.props.logged) ?  <LoggedNavbar SignOut={this.SignOut}/>  : <NotLoggedNavbar/> }
         <div className="grid">
           {this.props.children}
         </div>
@@ -29,6 +36,7 @@ const MainLayoutContainer = React.createClass({
 
 const mapStateToProps = function(store) {
   return {
+    logged: store.userState.logged
   };
 };
 
