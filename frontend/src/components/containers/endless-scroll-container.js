@@ -34,9 +34,10 @@ const EndlessScroll = React.createClass({
   },
 
   _renderMessages: function() {
-
+    console.log(this.props.photo)
     if (this.props.postList == undefined) { return ""; }
     return this.props.postList.slice(0, this.state.postsCount).map((post) => {
+      if(post.photo == undefined){
       return(
         <div key={post.id + 'post'} className="data-list-item">
             <div className="details">
@@ -44,7 +45,18 @@ const EndlessScroll = React.createClass({
               <img alt="Icon" className="post_user_avatar" src={post.user_avatar.url} />
             </div>
           </div>
-      )
+      )}
+      else{
+        return(
+        <div key={post.id + 'post'} className="data-list-item">
+            <div className="details">
+              {post.title} {post.body} {post.user_login}
+              <span>!!!!!!!!!!!!!!!!</span>
+              <img alt="Icon" className="post_user_avatar" src={post.user_avatar.url} />
+              <img alt="Icon" className="post_user_avatar" src={post.photo} />
+            </div>
+          </div>
+      )}
     })
   },
 
