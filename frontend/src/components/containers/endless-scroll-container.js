@@ -25,7 +25,7 @@ const EndlessScroll = React.createClass({
   },
 
   _loadMore: function() {
-    console.log(this.props.postList)
+
     if(this.props.postList.length < this.state.postsCount && (this.props.postList != undefined)){ this.setState({hasMoreItems: false}) }
     this.setState({loadingMore: true});
     setTimeout(() => {
