@@ -6,22 +6,27 @@ import PostForm from '../views/posts/form'
 import UsersPosts from '../views/posts/posts'
 
 import * as postApi from '../../api/post-api';
+import * as userApi from '../../api/user-api';
 
 const EndlessScroll = React.createClass({
 
   getInitialState : function() {
     return {
       loadingMore: false,
-      postsCount: 10
+      postsCount: 10,
+      hasMoreItems: true
     };
   },
 
-  componentWillMount: function(){
-    console.log('getPosts')
-    postApi.getPosts(2);
+  componentWillReceiveProps: function(NextProps) {
+    if (NextProps.user != this.props.user){
+      postApi.getPosts(NextProps.user);
+    }
   },
 
   _loadMore: function() {
+    console.log(this.props.postList)
+    if(this.props.postList.length < this.state.postsCount && (this.props.postList != undefined)){ this.setState({hasMoreItems: false}) }
     this.setState({loadingMore: true});
     setTimeout(() => {
       this.setState({postsCount: this.state.postsCount + 20, loadingMore: false})
@@ -29,7 +34,7 @@ const EndlessScroll = React.createClass({
   },
 
   _renderMessages: function() {
-    console.log(this.props.postList == undefined)
+
     if (this.props.postList == undefined) { return ""; }
     return this.props.postList.slice(0, this.state.postsCount).map((post) => {
       return(
@@ -45,7 +50,7 @@ const EndlessScroll = React.createClass({
 
   render: function(){
     return(
-      <InfiniteScroll loadingMore={this.state.loadingMore} threshold={10} elementIsScrollable={false} loadMore={this._loadMore}>
+      <InfiniteScroll loadingMore={this.state.loadingMore}hasMore={this.state.hasMoreItems} threshold={10} elementIsScrollable={false} loadMore={this._loadMore}>
         {this._renderMessages()}
       </InfiniteScroll>
     )

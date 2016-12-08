@@ -5,6 +5,7 @@ import Posts          from './posts-container'
 import Gallery        from './gallery-container'
 import Friends        from './friends-container'
 import Profile        from './profile-container'
+import EndlessScroll  from './endless-scroll-container'
 
 import * as userApi   from '../../api/user-api';
 
@@ -27,6 +28,7 @@ const UserProfileContainer = React.createClass({
         <Posts   user={this.props.user.id} />
         <Friends user={this.props.user.id} />
         <Gallery user={this.props.user.id} />
+        <EndlessScroll user={this.props.user.id}  />
       </div>
     );
   }
