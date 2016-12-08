@@ -6,8 +6,7 @@ class PostsController < ApplicationController
     p params[:count]
     @user = User.find(params[:user_id])
     posts = @user.posts
-    @posts = posts.last(10+params[:count]).map{|post|
-                               {title: post.title,
+    @posts = posts.map {|post| {title: post.title,
                                 body: post.body,
                                 id: post.id,
                                 user_login: "#{@user.name} #{@user.surname}",
@@ -20,7 +19,11 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = User.find(params[:user_id]).posts.create(post_params)
+    p "#{params[:photo]}"
+
+    @post = User.find(params[:user_id]).posts.create(title: params[:title], body: params[:body])
+    @photo = User.find(params[:user_id]).photos.create(user_id: params[:user_id], image: params[:image] )
+    
     if @post.save
       p "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"
       render json: @post.to_json
