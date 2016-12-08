@@ -42,18 +42,16 @@ export function getUsers() {
     });
 }
 
-export function createUser(user2) {
-  console.log(user2)
-  return axios.post('http://localhost:3000/users', {user: user2})
+export function createUser(user) {
+  return axios.post('http://localhost:3000/users', user)
     .then(response => {
       store.dispatch(createUserSuccess(response.data));
       return response;
     });
 }
 
-export function editUser(userId, user2) {
-  console.log(user2)
-  return axios.patch('http://localhost:3000/users/' + userId, {user: user2})
+export function editUser(userId, user) {
+  return axios.patch('http://localhost:3000/users/' + userId, user)
     .then(response => {
       store.dispatch(editUserSuccess(response.data));
       return response;
