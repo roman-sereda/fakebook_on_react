@@ -5,45 +5,48 @@ import InfiniteScroll from 'redux-infinite-scroll';
 import PostForm from '../views/posts/form'
 import UsersPosts from '../views/posts/posts'
 
-import * as postApi   from '../../api/post-api';
+import * as postApi from '../../api/post-api';
 
 const EndlessScroll = React.createClass({
 
-  componentWillMount: function(){
-    postApi.getPosts(this.props.user, 0);
-  },
-
   getInitialState : function() {
     return {
-      postsCount: 0,
-      loadingMore: false
+      loadingMore: false,
+      postsCount: 10
     };
   },
 
-  componentWillReceiveProps: function(NextProps) {
-    postApi.getPosts(NextProps.user, postsCount);
+  componentWillMount: function(){
+    console.log('getPosts')
+    postApi.getPosts(2);
   },
 
-  loadMore: function() {
+  _loadMore: function() {
     this.setState({loadingMore: true});
     setTimeout(() => {
-      this.props.componentWillReceiveProps();
-      this.setState({PostsCount: PostsCount+10, loadingMore: false})
-    }, 2000)
+      this.setState({postsCount: this.state.postsCount + 20, loadingMore: false})
+    }, 1000)
   },
 
-  renderPosts: function() {
-    return this.props.posts.map((msg) => {
+  _renderMessages: function() {
+    console.log(this.props.postList == undefined)
+    if (this.props.postList == undefined) { return ""; }
+    return this.props.postList.slice(0, this.state.postsCount).map((post) => {
       return(
-        <div className="item" key={msg.id}>{msg.body}</div>
+        <div key={post.id + 'post'} className="data-list-item">
+            <div className="details">
+              {post.title} {post.body} {post.user_login}
+              <img alt="Icon" className="post_user_avatar" src={post.user_avatar.url} />
+            </div>
+          </div>
       )
     })
   },
 
   render: function(){
     return(
-      <InfiniteScroll loadingMore={this.state.loadingMore} threshold={10} elementIsScrollable={false} loadMore={this.loadMore}>
-        {this.renderPosts()}
+      <InfiniteScroll loadingMore={this.state.loadingMore} threshold={10} elementIsScrollable={false} loadMore={this._loadMore}>
+        {this._renderMessages()}
       </InfiniteScroll>
     )
   }
@@ -52,7 +55,7 @@ const EndlessScroll = React.createClass({
 
 const mapStateToProps = function(store) {
   return {
-    posts: store.photoState.posts
+    postList: store.postState.posts
   };
 };
 
