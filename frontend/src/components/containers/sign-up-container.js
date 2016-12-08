@@ -8,12 +8,8 @@ const SignUp = React.createClass({
   onSubmit: function(event) {
     event.preventDefault();
 
-    let user = {};
-    user.name = this.refs.child.getName();
-    user.surname = this.refs.child.getSurame();
-    user.email = this.refs.child.getEmail();
-    user.password = this.refs.child.getPassword();
-    user.password_confirmation = this.refs.child.getPasswordConf();
+    var user = new FormData(document.getElementById('new_user'));
+    user.append('avatar', document.getElementById('file').files[0])
 
     userApi.createUser(user)
   },
