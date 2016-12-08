@@ -11,10 +11,6 @@ import * as userApi from '../../api/user-api';
 
 const PostsContainer = React.createClass({
 
-  componentWillReceiveProps: function(NextProps) {
-    postApi.getPosts(NextProps.user );
-  },
-
   onSubmit: function(event){
     event.preventDefault();
 
@@ -24,14 +20,13 @@ const PostsContainer = React.createClass({
     post.user_id = this.props.user;
 
     postApi.sendPost(post, this.props.user);
-    postApi.getPosts(this.props.user);
+    postApi.getPosts( this.props.user );
   },
 
   render: function() {
     return (
       <div>
         <PostForm onSubmit={this.onSubmit} ref="child" />
-        <EndlessScroll posts={this.props.postList} user={this.props.user}/>
       </div>
     )
   }
@@ -39,7 +34,6 @@ const PostsContainer = React.createClass({
 
 const mapStateToProps = function(store) {
   return {
-    postList: store.postState.posts
   };
 };
 
