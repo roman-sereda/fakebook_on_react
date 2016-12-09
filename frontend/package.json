@@ -5,7 +5,7 @@
   "repository": "https://github.com/roman-sereda/fakebook_on_react.git",
   "main": "bundle.js",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.hot.config.js --progress --inline",
+    "start": "webpack-dev-server --progress --inline --hot",
     "build": "webpack --debug",
     "test": "jest",
     "test:watch": "npm test -- --watch"
