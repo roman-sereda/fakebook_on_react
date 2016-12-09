@@ -27,11 +27,8 @@ const userReducer = function(state = initialState, action) {
     case types.SIGN_OUT_SUCCESS:
       return Object.assign({}, state, { logged: false });
 
-    case types.USER_PROFILE_SUCCESS:
-      return Object.assign({}, state, { userProfile: action.userProfile });
-
     case types.CREATE_USER_SUCCESS:
-      return Object.assign({}, state, { user: action.user });
+      return Object.assign({}, state, { logged: true });
 
     case types.EDIT_USER_SUCCESS:
       return Object.assign({}, state, { user: action.user });

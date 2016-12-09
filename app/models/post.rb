@@ -9,11 +9,10 @@ class Post < ActiveRecord::Base
   validates :title, length: {minimum: 2, maximum: 25}
   validates :body, length: {maximum: 200}
   validates :body, format: { without: /(((https?)?:\057\057)|(www.))[a-z_.]+[a-z_]{2,3}/i },if: :has_video?
-  validates :title, format: { without: /(((https?)?:\057\057)|(www.))[a-z_.]+[a-z_]{2,3}/i },if: :has_video?
 
 
   def has_photo?
-    photo == nil
+    photo_id == nil
   end
 
   def has_video?
