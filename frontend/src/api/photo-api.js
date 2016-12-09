@@ -19,7 +19,6 @@ export function getAllPhotos(userId) {
 }
 
 export function sendPhoto(userId, photo) {
-  console.log(photo)
   return axios.post('http://localhost:3000/users/' + userId + '/photos', photo)
     .then(response => {
       store.dispatch(sendPhotoSuccess(response.data));

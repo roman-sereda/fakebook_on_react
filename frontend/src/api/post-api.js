@@ -11,7 +11,6 @@ export function getPosts(userId) {
 }
 
 export function sendPost(post2, userId) {
-  console.log(post2);
   return axios.post('http://localhost:3000/users/' + userId + '/posts', post2)
     .then(response => {
       store.dispatch(createPostSuccess(response.data));
