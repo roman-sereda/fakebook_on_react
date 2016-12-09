@@ -18,7 +18,7 @@ const CurrentUser = React.createClass({
   },
 
   componentWillReceiveProps: function(NextProps) {
-    if (NextProps.user != this.props.user){
+    if (NextProps.user.id != this.props.user.id){
       userApi.getCurrentUser();
     }
   },
