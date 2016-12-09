@@ -12,5 +12,22 @@ FactoryGirl.define do
       name "wqeq"
       email "sad"
     end
+
+    trait :with_post do
+      after :create do |user|
+        FactoryGirl.create_list :post, 1, :user => user
+      end
+    end
+  end
+  factory :post do
+    factory :valid_post do
+      sequence(:title)  { "test"*2 }
+      sequence(:body) { "test"*2 }
+    end
+
+    factory :invalid_post do
+      title "t"
+      body "t"
+    end
   end
 end
