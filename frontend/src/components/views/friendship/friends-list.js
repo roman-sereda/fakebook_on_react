@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 export default function(props) {
   return (
-    <div className = 'profile-list-friends'>
+    <div>
       <h2>Friends List</h2>
       {props.friends.map(friend => {
         return (
