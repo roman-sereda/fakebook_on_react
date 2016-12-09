@@ -10,6 +10,10 @@ import * as userApi     from '../../api/user-api';
 
 const Posts = React.createClass({
 
+  componentDidMount: function(){
+    userApi.getCurrentUser();
+  },
+
   onSubmit: function(event){
     event.preventDefault();
 
@@ -34,6 +38,7 @@ const Posts = React.createClass({
 
 const mapStateToProps = function(store) {
   return {
+    current_user: store.userState.current_user
   };
 };
 

@@ -10,8 +10,14 @@ import * as userApi     from '../../api/user-api';
 
 const PhotosContainer = React.createClass({
 
+  componentDidMount: function(){
+    userApi.getCurrentUser();
+  },
+
   componentWillReceiveProps: function(NextProps) {
-    photoApi.getPhotos(NextProps.user );
+    if (NextProps.user != this.props.user || NextProps.photoList != this.props.photoList){
+      photoApi.getPhotos(NextProps.user );
+    }
   },
 
   AddImage: function(event){
@@ -27,19 +33,28 @@ const PhotosContainer = React.createClass({
   },
 
   render: function() {
+    if(this.props.current_user == this.props.user){
     return (
       <div className="profile-list-photos">
         <Photos photos={this.props.photoList} link={"/users/" + this.props.user + "/photos"} />
         <AddPhoto AddImage={this.AddImage} ref="p_child" />
       </div>
-    );
+    );}
+    else{
+      return(
+      <div className="profile-list-photos">
+        <Photos photos={this.props.photoList} link={"/users/" + this.props.user + "/photos"} />
+      </div>
+      );
+    }
   }
 
 });
 
 const mapStateToProps = function(store) {
   return {
-    photoList: store.photoState.photos
+    photoList: store.photoState.photos,
+    current_user: store.userState.current_user
   };
 };
 

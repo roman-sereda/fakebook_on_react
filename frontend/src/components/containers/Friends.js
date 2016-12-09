@@ -10,26 +10,36 @@ import * as userApi       from '../../api/user-api';
 
 const FriendsContainer = React.createClass({
 
+  componentDidMount: function(){
+    userApi.getCurrentUser();
+  },
+
   componentWillReceiveProps: function(NextProps) {
-    if (NextProps.user != this.props.user){
+    if (NextProps.user != this.props.user || NextProps.posts != this.props.posts){
       friendshipApi.getFriendship(NextProps.user );
     }
   },
 
   onSubmitFriend: function(event){
     event.preventDefault();
-    console.log(this.props.current_user.id + " | " + this.props.user)
     friendshipApi.sendFriendshipRequest(this.props.current_user.id, this.props.user);
     friendshipApi.getFriendship(this.props.user);
   },
 
   render: function() {
-    return (
-      <div className = 'profile-list-friends'>
-        <Friends friends={this.props.friends} link={"/users/" + this.props.user + "/friends"}/>
-        <AddFriend onSubmitFriend={this.onSubmitFriend} />
-      </div>
-    );
+    if(this.props.current_user.id != this.props.user){
+      return (
+        <div className = 'profile-list-friends'>
+          <Friends friends={this.props.friends} link={"/users/" + this.props.user + "/friends"}/>
+            <AddFriend onSubmitFriend={this.onSubmitFriend} />
+        </div>
+    );}
+    else{
+      return (
+        <div className = 'profile-list-friends'>
+          <Friends friends={this.props.friends} link={"/users/" + this.props.user + "/friends"}/>
+        </div>
+    );}
   }
 
 });

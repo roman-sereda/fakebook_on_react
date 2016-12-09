@@ -5,7 +5,7 @@ import Posts          from './Posts'
 import Gallery        from './Photos'
 import Friends        from './Friends'
 import Profile        from './Profile'
-import EndlessScroll  from './PostsList'
+import PostsList      from './PostsList'
 
 import * as userApi   from '../../api/user-api';
 
@@ -15,13 +15,13 @@ const User = React.createClass({
     userApi.getUser(this.props.params.userId);
   },
 
-  
+
   render: function() {
     return (
       <div>
         <div className="profile-news">
         <Posts   user={this.props.user.id} />
-        <EndlessScroll user={this.props.user.id} />
+        <PostsList user={this.props.user.id} />
         </div>
         <Profile user={this.props.user} />
         <Friends user={this.props.user.id} />

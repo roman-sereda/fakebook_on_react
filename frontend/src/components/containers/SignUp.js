@@ -1,5 +1,6 @@
 import React                    from 'react';
-import { connect, hashHistory } from 'react-redux';
+import { connect } from 'react-redux';
+import { hashHistory } from 'react-router'
 
 import CreateUser               from '../views/create-user';
 
@@ -14,6 +15,8 @@ const SignUp = React.createClass({
     user.append('avatar', document.getElementById('file').files[0])
 
     userApi.createUser(user);
+    userApi.getCurrentUser(user);
+    hashHistory.push(`/`)
   },
 
   render: function() {
