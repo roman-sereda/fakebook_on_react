@@ -1,7 +1,8 @@
 import React from 'react';
 
 export default function(props) {
-    return this.props.posts.slice(0, this.state.postsCount).map((post) => {
+  console.log("!!!!!!!!!")
+    return props.posts.slice(0, this.state.postsCount).map((post) => {
     if(post.photo == undefined && post.video_url == undefined){
     return(
       <div className="post" key={post.id + 'post'}>
