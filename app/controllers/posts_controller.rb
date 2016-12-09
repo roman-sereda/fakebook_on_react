@@ -23,10 +23,6 @@ class PostsController < ApplicationController
     end
   end
 
-  def new
-    Post.create.params[post_params]
-  end
-
   def create
     if(params[:image].class == ActionDispatch::Http::UploadedFile)
       @photo = User.find(params[:user_id]).photos.create(
@@ -41,9 +37,7 @@ class PostsController < ApplicationController
           video_url: if_has_video(params[:body]) ? get_url(params[:body]) : nil)
 
       if(if_has_video(params[:body]))
-        p @post.body
         @post.body = @post.body.sub(get_raw_url(params[:body]), "")
-        p @post.body
       end
     end
 

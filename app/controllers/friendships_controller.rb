@@ -5,10 +5,6 @@ class FriendshipsController < ApplicationController
     @friendships = Friendship.all
   end
 
-  def new
-    @friendship = Friendship.new
-  end
-
   def show
     user = User.find(params[:id])
     @friendship = user.friendships.map {|friend|
