@@ -25,7 +25,6 @@ const Profile = React.createClass({
 
   ShowEditUserForm: function(event){
     event.preventDefault();
-    console.log(this.state.showReply)
     this.setState({
       showReply : !this.state.showReply
     });

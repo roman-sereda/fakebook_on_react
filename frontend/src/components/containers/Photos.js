@@ -27,8 +27,6 @@ const PhotosContainer = React.createClass({
     data.append('user_id', this.props.user);
     data.append('image', document.getElementById('file2').files[0]);
 
-    console.log(data)
-
     photoApi.sendPhoto(this.props.user, data);
   },
 

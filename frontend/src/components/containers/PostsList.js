@@ -54,7 +54,6 @@ const PostsList = React.createClass({
           </div>
       )}
       else if(post.photo == undefined && post.video_url != undefined){
-        console.log(post.video_url)
         return(
           <div className="post" key={post.id + 'post'}>
             <div className="post-avatar"><img alt="Icon" className="post_user_avatar" src={post.user_avatar.url} /></div>

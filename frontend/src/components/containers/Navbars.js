@@ -25,7 +25,6 @@ const Navbars = React.createClass({
 
   SignOut: function(event){
     event.preventDefault();
-    console.log("OUT")
     userApi.signOut();
     hashHistory.push('/')
   },
