@@ -15,12 +15,7 @@ const User = React.createClass({
     userApi.getUser(this.props.params.userId);
   },
 
-  componentWillReceiveProps: function(NextProps) {
-      if (NextProps.params.userId != this.props.params.userId){
-        userApi.getUser(NextProps.params.userId);
-      }
-    },
-
+  
   render: function() {
     return (
       <div>

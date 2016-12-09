@@ -17,13 +17,6 @@ const CurrentUser = React.createClass({
     userApi.getCurrentUser();
   },
 
-  componentWillReceiveProps: function(NextProps) {
-    if (NextProps.user.id != this.props.user.id){
-      userApi.getCurrentUser();
-    }
-  },
-
-
   render: function() {
     return (
       <div className="user-profile">

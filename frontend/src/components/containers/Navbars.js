@@ -7,6 +7,8 @@ import NotLoggedNavbar    from '../layouts/unlogged-navbar';
 import LoggedNavbar       from '../layouts/logged-navbar';
 
 import * as userApi       from '../../api/user-api';
+import * as postApi       from '../../api/user-api';
+import * as galleryApi       from '../../api/user-api';
 
 
 const Navbars = React.createClass({
@@ -16,11 +18,12 @@ const Navbars = React.createClass({
   },
 
   SignOut: function(event){
-      event.preventDefault();
-      console.log("OUT")
-      userApi.signOut();
-      hashHistory.push('/')
+    event.preventDefault();
+    console.log("OUT")
+    userApi.signOut();
+    hashHistory.push('/')
   },
+
 
   render: function() {
     return (
