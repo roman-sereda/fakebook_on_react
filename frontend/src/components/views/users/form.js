@@ -11,7 +11,7 @@ export default React.createClass({
           <input type="text" name="email" placeholder="Email" />
           <input type="password" name="password" placeholder="Password" />
           <input type="password" name="password_confirmation" placeholder="Password confirmation" />
-          <p><input type="file" id="file" /></p>
+          <p><input type="file" name="file" id="file" /></p>
           <button>Search</button>
         </form>
       </div>
