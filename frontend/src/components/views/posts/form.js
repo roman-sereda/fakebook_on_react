@@ -16,6 +16,7 @@ export default React.createClass({
         <form onSubmit={this.props.onSubmit}>
           <input type="text" ref="title" placeholder="Enter title" />
           <input type="text" ref="body" placeholder="Enter body" />
+          <input type="file" ref="file" id="file"/>
           <button>Search</button>
         </form>
       </div>
