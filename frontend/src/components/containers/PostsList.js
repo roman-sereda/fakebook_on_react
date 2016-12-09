@@ -26,7 +26,7 @@ const PostsList = React.createClass({
   },
 
   _loadMore: function() {
-    if(this.props.postList.length < this.state.postsCount){ this.setState({hasMoreItems: false}) }
+    if(this.props.postList.length < this.state.postsCount && this.state.postsCount > 10){ this.setState({hasMoreItems: false}) }
     this.setState({loadingMore: true});
     setTimeout(() => {
       this.setState({postsCount: this.state.postsCount + 10, loadingMore: false})
