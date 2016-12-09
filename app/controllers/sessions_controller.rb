@@ -8,14 +8,13 @@ class SessionsController < ApplicationController
       sign_in(@user)
       render json: current_user.to_json
     else
-      render json: current_user.to_json
+      render json: []
     end
   end
 
   def destroy
-    p "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
     sign_out
-    render json: (false).to_json
+    render json: []
   end
 
   def user_params

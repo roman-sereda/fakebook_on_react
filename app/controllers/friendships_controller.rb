@@ -11,7 +11,6 @@ class FriendshipsController < ApplicationController
 
   def show
     user = User.find(params[:id])
-    p "FRINEDSHIP: #{user.friendships}"
     @friendship = user.friendships.map {|friend|
       user_temp = User.find(friend.friend_id)
       {id: friend.friend_id,
@@ -21,11 +20,14 @@ class FriendshipsController < ApplicationController
   end
 
   def create
-    if (Friendship.where(:user_id => params[:user_id], :friend_id => params[:friend_id]).exists?)
+    if (Friendship.where(:user_id => params[:user_id],
+                                      :friend_id => params[:friend_id]).exists?)
       render json: @friendship.to_json
     end
-    @friendship = User.find(params[:user_id]).friendships.create(:friend_id => params[:friend_id])
-    @friendship2 = User.find(params[:friend_id]).friendships.create(:friend_id => params[:user_id])
+    @friendship = User.find(params[:user_id]).friendships.create(
+                                                :friend_id => params[:friend_id])
+    @friendship2 = User.find(params[:friend_id]).friendships.create(
+                                                :friend_id => params[:user_id])
     if @friendship.save && @friendship2.save
       render json: @friendship.to_json
     else
@@ -36,7 +38,6 @@ class FriendshipsController < ApplicationController
   def destroy
     @friendship = current_user.friendships.find(params[:id])
     @friendship.destroy
-    flash[:notice] = "Removed friendship."
     redirect_to current_user
   end
 end

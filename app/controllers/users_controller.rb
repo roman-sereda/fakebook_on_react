@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    render json: @users.to_json
+    render json: @users
   end
 
   def home
@@ -13,12 +13,12 @@ class UsersController < ApplicationController
 
   def get_current_user
     if(signed_in?)
-      user3 =  {name: current_user.name,
+      user =  {name: current_user.name,
                 id: current_user.id,
                 surname: current_user.surname,
                 email: current_user.email,
                 avatar: current_user.avatar.url}
-      render json: user3
+      render json: user
     else
       render json: []
     end
@@ -26,16 +26,15 @@ class UsersController < ApplicationController
 
   def show
     user = User.find(params[:id])
-    user2 =  {name: user.name,
+    main_user =  {name: user.name,
               id: user.id,
               surname: user.surname,
               email: user.email,
               avatar: user.avatar.url}
-    render json: user2
+    render json: main_user
   end
 
   def ifLogged?
-    p "#{defined?(current_user.name)}"
     if(defined?(current_user.name) == nil)
       render json: false
     else
@@ -44,32 +43,32 @@ class UsersController < ApplicationController
   end
 
   def create
-      @user = User.create(name: user_params[:name],
-                       surname: user_params[:surname],
-                       email: user_params[:email],
-                       password: user_params[:password],
-                       password_confirmation: user_params[:password_confirmation],
-                       avatar: File.open('default-avatar.jpg'))
-
+      @user = User.create(name: params[:name],
+                       surname: params[:surname],
+                       email: params[:email],
+                       password: params[:password],
+                       password_confirmation: params[:password_confirmation],
+                       avatar: params[:avatar])
     if @user.save
+      sign_in(@user)
       render json: @users.to_json
     else
       p @user.errors.full_messages
-      render json: @users.to_json
+      render json: []
     end
   end
 
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
+    if @user.update_attributes(name: params[:name],
+                     surname: params[:surname],
+                     email: params[:email],
+                     password: params[:password],
+                     password_confirmation: params[:password_confirmation],
+                     avatar: params[:avatar])
       render json: @user.to_json
     else
-      render json: @user.to_json
+      render json: []
     end
   end
-
-  def user_params
-    params.require(:user).permit(:name, :surname, :email, :password, :password_confirmation)
-  end
-
 end
