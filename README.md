@@ -23,10 +23,10 @@ npm install
 '''
 rails s
 '''
-2. In frontend folde run
+2. In frontend folder run
 '''
 npm start
 '''
 
 ### *Using*
-id you do rake db:seed, u can login with email u2@u.u and password qweqweqwe 
+id you do rake db:seed, u can login with email u2@u.u and password qweqweqwe
