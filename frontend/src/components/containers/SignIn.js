@@ -1,6 +1,5 @@
 import React                    from 'react';
 import { connect }              from 'react-redux';
-import { browserHistory, push } from 'react-router'
 
 import CreateSession            from '../views/create-session';
 

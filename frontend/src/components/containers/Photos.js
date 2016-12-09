@@ -25,7 +25,7 @@ const PhotosContainer = React.createClass({
 
     var data = new FormData();
     data.append('user_id', this.props.user);
-    data.append('image', document.getElementById('file').files[0]);
+    data.append('image', document.getElementById('file2').files[0]);
 
     console.log(data)
 
@@ -33,17 +33,18 @@ const PhotosContainer = React.createClass({
   },
 
   render: function() {
-    if(this.props.current_user == this.props.user){
+    if(this.props.current_user.id != this.props.user){
     return (
       <div className="profile-list-photos">
         <Photos photos={this.props.photoList} link={"/users/" + this.props.user + "/photos"} />
-        <AddPhoto AddImage={this.AddImage} ref="p_child" />
+
       </div>
     );}
     else{
       return(
       <div className="profile-list-photos">
         <Photos photos={this.props.photoList} link={"/users/" + this.props.user + "/photos"} />
+        <AddPhoto AddImage={this.AddImage} />
       </div>
       );
     }

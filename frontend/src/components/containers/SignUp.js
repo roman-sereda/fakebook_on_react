@@ -1,6 +1,6 @@
 import React                    from 'react';
-import { connect } from 'react-redux';
-import { hashHistory } from 'react-router'
+import { connect }              from 'react-redux';
+import { hashHistory }          from 'react-router'
 
 import CreateUser               from '../views/create-user';
 
