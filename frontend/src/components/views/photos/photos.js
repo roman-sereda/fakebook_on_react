@@ -3,17 +3,15 @@ import { Link } from 'react-router';
 
 export default function(props) {
   return (
-    <div className="profile-list-friends">
+    <div>
+      <div className="LinkToGallery"><Link to={props.link}>All photos</Link></div>
       {props.photos.map(photo => {
         return (
-          <div key={'photo' + photo.id} className="data-list-item">
-            <div className="details">
-              <img alt="Icon" className="friend_photo" src={photo.image.url} />
-            </div>
+          <div className="users_photo" key={'photo' + photo.id} >
+            <img className="friend_avatar" src={photo.image.url} />
           </div>
         );
       })}
-      <Link to={props.link}>All photos</Link>
     </div>
   );
 }
