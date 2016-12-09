@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { hashHistory } from 'react-router'
 import store from '../../store';
 
-import NotLoggedNavbar from '../layouts/main-layout';
+import NotLoggedNavbar from '../layouts/unlogged-navbar';
 import LoggedNavbar from '../layouts/logged-navbar';
 import * as userApi from '../../api/user-api';
 
