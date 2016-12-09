@@ -13,7 +13,6 @@ export default function(props) {
             <div className="details">
               {user.name}
               <Link to={'/users/' + user.id}>{user.id}</Link>
-              Fuck you
             </div>
           </div>
         );

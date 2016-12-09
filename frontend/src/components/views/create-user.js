@@ -4,7 +4,8 @@ export default React.createClass({
 
   render: function() {
     return (
-      <div className="user-profile">
+      <div className="log-form">
+        <h2>Sign Up</h2>
         <form id="new_user" onSubmit={this.props.onSubmit} className="search">
           <p><input type="text" name="name" placeholder="Name" /></p>
           <p><input type="text" name="surname" placeholder="Surname" /></p>
