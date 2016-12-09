@@ -5,9 +5,7 @@ module PostsHelper
   end
 
   def get_raw_url(text)
-    text.sub(/http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/, "")
-    p text
-    return text
+    text[/http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/]
   end
 
   def get_url(text)
