@@ -25,34 +25,32 @@ const EndlessScroll = React.createClass({
   },
 
   _loadMore: function() {
-
+    console.log(this.props.postList.length < this.state.postsCount && (this.props.postList != undefined))
+    if(this.props.postList.length < this.state.postsCount && (this.props.postList != undefined)){ this.setState({hasMoreItems: false}) }
     this.setState({loadingMore: true});
     setTimeout(() => {
-      this.setState({postsCount: this.state.postsCount + 20, loadingMore: false})
+      this.setState({postsCount: this.state.postsCount + 10, loadingMore: false})
     }, 1000)
   },
 
   _renderMessages: function() {
-    console.log(this.props.photo)
+    if (this.props.postList == undefined) { return ""; }
     return this.props.postList.slice(0, this.state.postsCount).map((post) => {
       if(post.photo == undefined){
       return(
-        <div key={post.id + 'post'} className="data-list-item">
-            <div className="details">
-              {post.title} {post.body} {post.user_login}
-              <img alt="Icon" className="post_user_avatar" src={post.user_avatar.url} />
-            </div>
-          </div>
+        <div className="post" key={post.id + 'post'}>
+          <div className="post-avatar"><img alt="Icon" className="post_user_avatar" src={post.user_avatar.url} /></div>
+          <div className="post-login">{post.user_login}</div>
+          <div className="post-contetnt">{post.title} {post.body}</div>
+        </div>
       )}
       else{
         return(
-        <div key={post.id + 'post'} className="data-list-item">
-            <div className="details">
-              {post.title} {post.body} {post.user_login}
-              <span>!!!!!!!!!!!!!!!!</span>
-              <img alt="Icon" className="post_user_avatar" src={post.user_avatar.url} />
-              <img alt="Icon" className="post_user_avatar" src={post.photo} />
-            </div>
+          <div className="post" key={post.id + 'post'}>
+            <div className="post-avatar"><img alt="Icon" className="post_user_avatar" src={post.user_avatar.url} /></div>
+            <div className="post-login">{post.user_login}</div>
+            <div className="post-contetnt">{post.title} {post.body}</div>
+            <img alt="Icon" className="post_photo" src={post.photo} />
           </div>
       )}
     })
@@ -60,7 +58,7 @@ const EndlessScroll = React.createClass({
 
   render: function(){
     return(
-      <InfiniteScroll loadingMore={this.state.loadingMore}  threshold={10} elementIsScrollable={false} loadMore={this._loadMore}>
+      <InfiniteScroll loadingMore={this.state.loadingMore} hasMore={this.state.hasMoreItems} threshold={10} elementIsScrollable={false} loadMore={this._loadMore}>
         {this._renderMessages()}
       </InfiniteScroll>
     )
