@@ -9,7 +9,7 @@ import LoggedNavbar       from '../layouts/logged-navbar';
 import * as userApi       from '../../api/user-api';
 
 
-const MainLayoutContainer = React.createClass({
+const Navbars = React.createClass({
 
   componentWillMount: function() {
     userApi.checkIfLogged();
@@ -41,4 +41,4 @@ const mapStateToProps = function(store) {
   };
 };
 
-export default connect(mapStateToProps)(MainLayoutContainer);
+export default connect(mapStateToProps)(Navbars);

@@ -7,7 +7,7 @@ import EditForm       from '../views/users/form';
 
 import * as userApi   from '../../api/user-api';
 
-const ProfileContainer = React.createClass({
+const Profile = React.createClass({
    getInitialState : function() {
      return {
        showReply : true
@@ -47,4 +47,4 @@ const mapStateToProps = function(store) {
   };
 };
 
-export default connect(mapStateToProps)(ProfileContainer);
+export default connect(mapStateToProps)(Profile);

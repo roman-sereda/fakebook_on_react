@@ -9,7 +9,7 @@ import UsersPosts       from '../views/posts/posts'
 import * as postApi     from '../../api/post-api';
 import * as userApi     from '../../api/user-api';
 
-const EndlessScroll = React.createClass({
+const PostsList = React.createClass({
 
   getInitialState : function() {
     return {
@@ -73,4 +73,4 @@ const mapStateToProps = function(store) {
   };
 };
 
-export default connect(mapStateToProps)(EndlessScroll);
+export default connect(mapStateToProps)(PostsList);

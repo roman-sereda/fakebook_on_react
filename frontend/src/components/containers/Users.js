@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import UserList from '../views/user-list';
+import UsersList from '../views/user-list';
 import * as userApi from '../../api/user-api';
 import store from '../../store';
 
-const UserListContainer = React.createClass({
+const Users = React.createClass({
 
   componentDidMount: function() {
     userApi.getUsers();
@@ -12,7 +12,7 @@ const UserListContainer = React.createClass({
 
   render: function() {
     return (
-      <UserList users={this.props.users} />
+      <UsersList users={this.props.users} />
     );
   }
 
@@ -24,4 +24,4 @@ const mapStateToProps = function(store) {
   };
 };
 
-export default connect(mapStateToProps)(UserListContainer);
+export default connect(mapStateToProps)(Users);

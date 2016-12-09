@@ -2,14 +2,14 @@ import React          from 'react';
 import { connect }    from 'react-redux';
 
 import Posts          from './Posts'
-import Gallery        from './Gallery'
+import Gallery        from './Photos'
 import Friends        from './Friends'
 import Profile        from './Profile'
 import EndlessScroll  from './PostsList'
 
 import * as userApi   from '../../api/user-api';
 
-const UserProfileContainer = React.createClass({
+const User = React.createClass({
 
   componentDidMount: function() {
     userApi.getUser(this.props.params.userId);
@@ -42,4 +42,4 @@ const mapStateToProps = function(store) {
   };
 };
 
-export default connect(mapStateToProps)(UserProfileContainer);
+export default connect(mapStateToProps)(User);

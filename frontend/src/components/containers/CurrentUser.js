@@ -3,7 +3,7 @@ import store          from '../../store';
 import { connect }    from 'react-redux';
 
 import Posts          from './Posts'
-import Gallery        from './Gallery'
+import Gallery        from './Photos'
 import Friends        from './Friends'
 import Profile        from './Profile'
 import EndlessScroll  from './PostsList'
@@ -11,7 +11,7 @@ import EndlessScroll  from './PostsList'
 import * as userApi   from '../../api/user-api';
 import * as postApi   from '../../api/post-api';
 
-const CurrentUserProfileContainer = React.createClass({
+const CurrentUser = React.createClass({
 
   componentWillMount: function() {
     userApi.getCurrentUser();
@@ -46,4 +46,4 @@ const mapStateToProps = function(store) {
   };
 };
 
-export default connect(mapStateToProps)(CurrentUserProfileContainer);
+export default connect(mapStateToProps)(CurrentUser);

@@ -8,7 +8,7 @@ import UsersPosts       from '../views/posts/posts'
 import * as postApi     from '../../api/post-api';
 import * as userApi     from '../../api/user-api';
 
-const PostsContainer = React.createClass({
+const Posts = React.createClass({
 
   onSubmit: function(event){
     event.preventDefault();
@@ -37,4 +37,4 @@ const mapStateToProps = function(store) {
   };
 };
 
-export default connect(mapStateToProps)(PostsContainer);
+export default connect(mapStateToProps)(Posts);

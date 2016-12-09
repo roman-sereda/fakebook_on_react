@@ -8,7 +8,7 @@ import Photos           from '../views/photos/photos'
 import * as photoApi    from '../../api/photo-api';
 import * as userApi     from '../../api/user-api';
 
-const GalleryContainer = React.createClass({
+const PhotosContainer = React.createClass({
 
   componentWillReceiveProps: function(NextProps) {
     photoApi.getPhotos(NextProps.user );
@@ -43,4 +43,4 @@ const mapStateToProps = function(store) {
   };
 };
 
-export default connect(mapStateToProps)(GalleryContainer);
+export default connect(mapStateToProps)(PhotosContainer);

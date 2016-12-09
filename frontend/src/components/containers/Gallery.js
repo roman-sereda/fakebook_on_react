@@ -7,7 +7,7 @@ import Gallery            from '../views/photos/gallery';
 import * as photoApi      from '../../api/photo-api';
 
 
-const GalleryListContainer = React.createClass({
+const GalleryContainer = React.createClass({
 
   componentDidMount: function() {
     photoApi.getAllPhotos(this.props.params.userId);
@@ -27,4 +27,4 @@ const mapStateToProps = function(store) {
   };
 };
 
-export default connect(mapStateToProps)(GalleryListContainer);
+export default connect(mapStateToProps)(GalleryContainer);

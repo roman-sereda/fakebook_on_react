@@ -7,7 +7,7 @@ import SignIn           from './SignIn';
 
 import * as userApi     from '../../api/user-api';
 
-const Temp = React.createClass({
+const Router = React.createClass({
 
   componentWillMount: function() {
     userApi.checkIfLogged();
@@ -29,4 +29,4 @@ const mapStateToProps = function(store) {
   };
 };
 
-export default connect(mapStateToProps)(Temp);
+export default connect(mapStateToProps)(Router);
