@@ -4,7 +4,7 @@ import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 
 import Navbars          from './components/containers/Navbars';
 import Users            from './components/containers/Users';
-import User             from './components/containers/Users';
+import User             from './components/containers/User';
 import SignIn           from './components/containers/SignIn';
 import SignUp           from './components/containers/SignUp';
 import MRouter           from './components/containers/Router';
