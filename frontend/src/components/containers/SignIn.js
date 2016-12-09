@@ -1,8 +1,10 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import CreateSession from '../views/create-session';
-import * as userApi from '../../api/user-api';
+import React                    from 'react';
+import { connect }              from 'react-redux';
 import { browserHistory, push } from 'react-router'
+
+import CreateSession            from '../views/create-session';
+
+import * as userApi             from '../../api/user-api';
 
 const SignIn = React.createClass({
 

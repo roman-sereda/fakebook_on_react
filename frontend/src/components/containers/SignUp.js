@@ -1,7 +1,9 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import CreateUser from '../views/create-user';
-import * as userApi from '../../api/user-api';
+import React                    from 'react';
+import { connect, hashHistory } from 'react-redux';
+
+import CreateUser               from '../views/create-user';
+
+import * as userApi             from '../../api/user-api';
 
 const SignUp = React.createClass({
 
@@ -11,7 +13,7 @@ const SignUp = React.createClass({
     var user = new FormData(document.getElementById('new_user'));
     user.append('avatar', document.getElementById('file').files[0])
 
-    userApi.createUser(user)
+    userApi.createUser(user);
   },
 
   render: function() {

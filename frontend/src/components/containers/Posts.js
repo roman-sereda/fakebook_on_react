@@ -1,13 +1,12 @@
-import React from 'react';
-import store from '../../store';
-import { connect } from 'react-redux';
-import InfiniteScroll from 'redux-infinite-scroll';
-import PostForm from '../views/posts/form'
-import UsersPosts from '../views/posts/posts'
-import EndlessScroll from './endless-scroll-container'
+import React            from 'react';
+import store            from '../../store';
+import { connect }      from 'react-redux';
 
-import * as postApi from '../../api/post-api';
-import * as userApi from '../../api/user-api';
+import PostForm         from '../views/posts/form'
+import UsersPosts       from '../views/posts/posts'
+
+import * as postApi     from '../../api/post-api';
+import * as userApi     from '../../api/user-api';
 
 const PostsContainer = React.createClass({
 

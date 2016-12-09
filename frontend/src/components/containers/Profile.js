@@ -33,7 +33,7 @@ const ProfileContainer = React.createClass({
 
   render: function() {
     return (
-      <div>
+      <div className="profile-info">
         <UserProfile profile={this.props.user} ShowEditUserForm={this.ShowEditUserForm} />
         <div className={this.state.showReply ? 'hidden' : ''}><EditForm UpdateUser = {this.UpdateUser} /></div>
       </div>

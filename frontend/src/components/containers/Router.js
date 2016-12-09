@@ -1,9 +1,11 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import Profile2 from './current-user-profile-container';
-import SignIn from './sign-in-container';
-import * as userApi from '../../api/user-api';
-import store from '../../store';
+import React            from 'react';
+import { connect }      from 'react-redux';
+import store            from '../../store';
+
+import Profile2         from './CurrentUser';
+import SignIn           from './SignIn';
+
+import * as userApi     from '../../api/user-api';
 
 const Temp = React.createClass({
 

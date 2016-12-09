@@ -1,12 +1,12 @@
-import React from 'react';
-import store from '../../store';
-import { connect } from 'react-redux';
+import React            from 'react';
+import store            from '../../store';
+import { connect }      from 'react-redux';
 
-import AddPhoto from '../views/photos/add_photo'
-import Photos from '../views/photos/photos'
+import AddPhoto         from '../views/photos/add_photo'
+import Photos           from '../views/photos/photos'
 
-import * as photoApi from '../../api/photo-api';
-import * as userApi from '../../api/user-api';
+import * as photoApi    from '../../api/photo-api';
+import * as userApi     from '../../api/user-api';
 
 const GalleryContainer = React.createClass({
 
@@ -28,7 +28,7 @@ const GalleryContainer = React.createClass({
 
   render: function() {
     return (
-      <div>
+      <div className="profile-list-photos">
         <Photos photos={this.props.photoList} link={"/users/" + this.props.user + "/photos"} />
         <AddPhoto AddImage={this.AddImage} ref="p_child" />
       </div>

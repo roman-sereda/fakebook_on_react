@@ -1,11 +1,11 @@
 import React          from 'react';
 import { connect }    from 'react-redux';
 
-import Posts          from './posts-container'
-import Gallery        from './gallery-container'
-import Friends        from './friends-container'
-import Profile        from './profile-container'
-import EndlessScroll  from './endless-scroll-container'
+import Posts          from './Posts'
+import Gallery        from './Gallery'
+import Friends        from './Friends'
+import Profile        from './Profile'
+import EndlessScroll  from './PostsList'
 
 import * as userApi   from '../../api/user-api';
 
@@ -24,11 +24,13 @@ const UserProfileContainer = React.createClass({
   render: function() {
     return (
       <div>
-        <Profile user={this.props.user} />
+        <div className="profile-news">
         <Posts   user={this.props.user.id} />
+        <EndlessScroll user={this.props.user.id} />
+        </div>
+        <Profile user={this.props.user} />
         <Friends user={this.props.user.id} />
         <Gallery user={this.props.user.id} />
-        <EndlessScroll user={this.props.user.id}  />
       </div>
     );
   }

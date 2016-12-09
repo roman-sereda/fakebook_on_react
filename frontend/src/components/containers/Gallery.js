@@ -1,10 +1,10 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import store from '../../store';
+import React              from 'react';
+import { connect }        from 'react-redux';
+import store              from '../../store';
 
-import Gallery from '../views/photos/gallery';
+import Gallery            from '../views/photos/gallery';
 
-import * as photoApi from '../../api/photo-api';
+import * as photoApi      from '../../api/photo-api';
 
 
 const GalleryListContainer = React.createClass({
