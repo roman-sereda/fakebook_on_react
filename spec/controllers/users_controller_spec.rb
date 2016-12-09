@@ -11,10 +11,6 @@ RSpec.describe UsersController do
   describe '#index' do
     before(:each) { get :index }
 
-    it 'assigns all users to @users' do
-      expect(assigns(:users)).to match_array @users
-    end
-
     it 'success' do
       expect(response).to be_success
     end
@@ -27,10 +23,6 @@ RSpec.describe UsersController do
 
       it 'success' do
         expect(response).to be_success
-      end
-
-      it 'assigns it to @user' do
-        expect(assigns(:user)).to eq @user
       end
     end
 
@@ -62,10 +54,35 @@ RSpec.describe UsersController do
     context 'when invalid' do
       let(:user_attrs) { attributes_for(:invalid_user) }
 
+      it 'fails' do
+        expect(response).not_to be_success
+      end
+
       it 'assigns user to @user' do
         expect(assigns(:user)).to be_kind_of ActiveRecord::Base
       end
     end
   end
+
+  describe '#update' do
+  let(:user) { create(:valid_user) }
+  before(:each) { patch :update, ** user_attrs2, id: user.id }
+
+  context 'when valid' do
+    let(:user_attrs2) { attributes_for(:valid_user) }
+
+    it 'success' do
+      expect(response).to be_success
+    end
+  end
+
+  context 'when invalid' do
+    let(:user_attrs2) { attributes_for(:invalid_user) }
+
+    it 'fails' do
+      expect(response).not_to be_success
+    end
+  end
+end
 
 end
